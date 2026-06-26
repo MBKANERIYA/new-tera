@@ -9,12 +9,12 @@ export default function AdminPostProperty() {
   const [success, setSuccess] = useState(false);
   
   const [formData, setFormData] = useState({
-    title: '', description: '', price: '', pricePerSqFt: '', emiStart: '',
+    title: '', description: '', price: '', priceUnit: 'Lacs', pricePerSqFt: '', emiStart: '',
     listingType: 'Lease', category: 'Warehouse', isFeatured: false, isRera: false,
     reraNumber: '', builder: '', type: 'Warehouse', subType: 'warehouse',
     location: '', city: '', pincode: '', address: '', latitude: '', longitude: '',
     googleMapLink: '', constructionStatus: 'Ready to Move', possessionDate: 'Immediate',
-    whatsNew: '', floorNo: 'Ground', carpetArea: '', builtUpArea: '', totalArea: '',
+    whatsNew: '', floorNo: 'Ground', carpetArea: '', builtUpArea: '', totalArea: '', areaUnit: 'Sq Ft',
     totalFloors: '1', noOfRooms: '', structureType: '', listingAge: '', noOfFloors: '1',
     facing: '', overlooking: '', ownership: 'Freehold', transactionType: 'New Property',
     flooring: '', propertyAge: '', availability: '', furnishingState: 'Unfurnished',
@@ -81,10 +81,36 @@ export default function AdminPostProperty() {
             // Populate formData
             const newData = { ...formData };
             Object.keys(newData).forEach(key => {
-              if (data[key] !== undefined) {
+              if (data[key] !== undefined && key !== 'price') {
                 newData[key] = data[key];
               }
             });
+
+            // Parse price and priceUnit from existing DB value
+            if (data.price) {
+               const cleanPrice = data.price.replace('₹', '').trim();
+               const spaceIdx = cleanPrice.indexOf(' ');
+               if(spaceIdx !== -1) {
+                  newData.price = cleanPrice.substring(0, spaceIdx);
+                  newData.priceUnit = cleanPrice.substring(spaceIdx + 1);
+               } else {
+                  newData.price = cleanPrice;
+                  newData.priceUnit = 'Lacs';
+               }
+            }
+
+            // Parse totalArea and areaUnit
+            if (data.totalArea) {
+               const cleanArea = data.totalArea.trim();
+               const spaceIdx = cleanArea.indexOf(' ');
+               if (spaceIdx !== -1) {
+                  newData.totalArea = cleanArea.substring(0, spaceIdx);
+                  newData.areaUnit = cleanArea.substring(spaceIdx + 1);
+               } else {
+                  newData.totalArea = cleanArea;
+                  newData.areaUnit = 'Sq Ft';
+               }
+            }
 
             // Populate categoryData
             if (data.categoryData) {
@@ -129,6 +155,40 @@ export default function AdminPostProperty() {
       fetchProperty();
     }
   }, [id]);
+
+  // Auto-calculate Price / Sq Ft
+  useEffect(() => {
+    if (formData.price && formData.totalArea) {
+      const priceVal = parseFloat(formData.price);
+      const areaVal = parseFloat(formData.totalArea);
+      
+      if (!isNaN(priceVal) && !isNaN(areaVal) && areaVal > 0) {
+        let priceMultiplier = 1;
+        if (formData.priceUnit.includes('K')) priceMultiplier = 1000;
+        else if (formData.priceUnit.includes('Lacs')) priceMultiplier = 100000;
+        else if (formData.priceUnit.includes('Cr')) priceMultiplier = 10000000;
+        
+        let areaMultiplier = 1;
+        if (formData.areaUnit === 'Sq Mtr') areaMultiplier = 10.7639;
+        else if (formData.areaUnit === 'Acre') areaMultiplier = 43560;
+        else if (formData.areaUnit === 'Hectare') areaMultiplier = 107639;
+        else if (formData.areaUnit === 'Sq Yd') areaMultiplier = 9;
+        
+        const totalValue = priceVal * priceMultiplier;
+        const totalSqFt = areaVal * areaMultiplier;
+        
+        const calcPricePerSqFt = Math.round(totalValue / totalSqFt);
+        
+        setFormData(prev => {
+           const newVal = `₹ ${calcPricePerSqFt}`;
+           if (prev.pricePerSqFt !== newVal) {
+              return { ...prev, pricePerSqFt: newVal };
+           }
+           return prev;
+        });
+      }
+    }
+  }, [formData.price, formData.priceUnit, formData.totalArea, formData.areaUnit]);
 
   const handleLogout = () => {
     navigate('/admin/dashboard');
@@ -232,6 +292,14 @@ export default function AdminPostProperty() {
       categoryData[keyName] = payload[k];
       delete payload[k];
     });
+    
+    payload.price = `₹ ${payload.price} ${payload.priceUnit}`;
+    delete payload.priceUnit;
+
+    if (payload.totalArea) {
+      payload.totalArea = `${payload.totalArea} ${payload.areaUnit}`;
+    }
+    delete payload.areaUnit;
     
     payload.categoryData = JSON.stringify(categoryData);
     payload.extraFields = JSON.stringify(extraFields);
@@ -371,6 +439,12 @@ export default function AdminPostProperty() {
   const cardHeaderClass = "flex items-center gap-3 text-lg font-extrabold text-gray-900 mb-8 pb-4 border-b border-gray-50/80";
   const iconWrapperClass = "p-2 bg-purple-50 rounded-xl text-purple-600 shadow-sm";
 
+  const propertyTypesByCategory = {
+    'Warehouse': ['Warehouse Space', 'Godown'],
+    'Industrial': ['Industrial Plot', 'Industrial Workspace'],
+    'Commercial': ['Office Space', 'Retail Shop', 'Commercial Land', 'Agriculter Land']
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100/50 pb-20 font-sans selection:bg-purple-100 selection:text-purple-900">
       <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200/80 px-8 py-4 flex items-center justify-between sticky top-0 z-50 transition-all">
@@ -415,14 +489,24 @@ export default function AdminPostProperty() {
                 <label className={labelClass}>DESCRIPTION</label>
                 <textarea rows={4} name="description" value={formData.description} onChange={handleChange} className={inputClass} placeholder="Detailed description of the property, its USPs, and surroundings..." />
               </div>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-3 gap-5">
                 <div>
-                  <label className={labelClass}>MONTHLY RENT / PRICE *</label>
-                  <input required type="text" name="price" value={formData.price} onChange={handleChange} className={inputClass} placeholder="e.g. â‚¹ 5,00,000" />
+                  <label className={labelClass}>PRICE NUMERIC VALUE *</label>
+                  <input required type="number" min="0" step="any" name="price" value={formData.price} onChange={handleChange} className={inputClass} placeholder="e.g. 45" />
+                </div>
+                <div>
+                  <label className={labelClass}>PRICE UNIT *</label>
+                  <select name="priceUnit" value={formData.priceUnit} onChange={handleChange} className={`${inputClass} cursor-pointer bg-white`}>
+                    <option value="K">K (₹)</option>
+                    <option value="K / month">K / month (₹)</option>
+                    <option value="Lacs">Lakh (₹)</option>
+                    <option value="Lacs / month">Lakh / month (₹)</option>
+                    <option value="Cr">Cr (₹)</option>
+                  </select>
                 </div>
                 <div>
                   <label className={labelClass}>PRICE / SQ FT</label>
-                  <input type="text" name="pricePerSqFt" value={formData.pricePerSqFt} onChange={handleChange} className={inputClass} placeholder="e.g. â‚¹ 33" />
+                  <input type="text" name="pricePerSqFt" value={formData.pricePerSqFt} onChange={handleChange} className={inputClass} placeholder="e.g. ₹ 33" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-5">
@@ -435,10 +519,20 @@ export default function AdminPostProperty() {
                   <input type="text" name="ownerContact" value={formData.ownerContact} onChange={handleChange} className={inputClass} placeholder="+91 9876543210" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-3 gap-5">
                 <div>
                   <label className={labelClass}>TOTAL AREA</label>
-                  <input type="text" name="totalArea" value={formData.totalArea} onChange={handleChange} className={inputClass} placeholder="e.g. 15,000 Sq Ft" />
+                  <input type="number" min="0" step="any" name="totalArea" value={formData.totalArea} onChange={handleChange} className={inputClass} placeholder="e.g. 15000" />
+                </div>
+                <div>
+                  <label className={labelClass}>AREA UNIT</label>
+                  <select name="areaUnit" value={formData.areaUnit} onChange={handleChange} className={`${inputClass} cursor-pointer bg-white`}>
+                    <option value="Sq Ft">Sq Ft</option>
+                    <option value="Sq Mtr">Sq Mtr</option>
+                    <option value="Acre">Acre</option>
+                    <option value="Hectare">Hectare</option>
+                    <option value="Sq Yd">Sq Yd</option>
+                  </select>
                 </div>
                 <div>
                   <label className={labelClass}>POSSESSION STATUS</label>
@@ -481,7 +575,7 @@ export default function AdminPostProperty() {
                    { name: 'Industrial', icon: <Factory className="w-6 h-6 mb-3" /> },
                    { name: 'Commercial', icon: <Trees className="w-6 h-6 mb-3" /> }
                  ].map(cat => (
-                   <button key={cat.name} type="button" onClick={() => setFormData(prev => ({...prev, category: cat.name}))} className={`group flex flex-col items-center justify-center p-6 border-2 rounded-2xl transition-all duration-300 ${formData.category === cat.name ? 'border-purple-600 bg-purple-50/50 text-purple-700 shadow-md shadow-purple-500/10 scale-[1.02]' : 'border-gray-100 hover:border-purple-200 hover:bg-purple-50/30 bg-gray-50/30 text-gray-400 hover:text-purple-500'}`}>
+                   <button key={cat.name} type="button" onClick={() => setFormData(prev => ({...prev, category: cat.name, type: propertyTypesByCategory[cat.name][0]}))} className={`group flex flex-col items-center justify-center p-6 border-2 rounded-2xl transition-all duration-300 ${formData.category === cat.name ? 'border-purple-600 bg-purple-50/50 text-purple-700 shadow-md shadow-purple-500/10 scale-[1.02]' : 'border-gray-100 hover:border-purple-200 hover:bg-purple-50/30 bg-gray-50/30 text-gray-400 hover:text-purple-500'}`}>
                      <div className="transition-transform duration-300 group-hover:-translate-y-1">{cat.icon}</div>
                      <span className="text-sm font-extrabold">{cat.name}</span>
                    </button>
@@ -491,9 +585,9 @@ export default function AdminPostProperty() {
 
             <div className="mb-8">
                <label className={labelClass}>PROPERTY TYPE</label>
-               <div className="flex gap-4 max-w-lg">
-                  {['Warehouse / Godown', 'Factory / Shed'].map(type => (
-                    <button key={type} type="button" onClick={() => setFormData(prev => ({...prev, type: type}))} className={`flex-1 py-3 px-2 border-2 rounded-xl text-sm font-bold transition-all duration-300 ${formData.type === type ? 'bg-purple-600 border-purple-600 text-white shadow-lg shadow-purple-500/30 scale-[1.02]' : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:bg-gray-50'}`}>{type}</button>
+               <div className="flex flex-wrap gap-4 max-w-2xl">
+                  {propertyTypesByCategory[formData.category]?.map(type => (
+                    <button key={type} type="button" onClick={() => setFormData(prev => ({...prev, type: type}))} className={`flex-1 min-w-[160px] py-3 px-2 border-2 rounded-xl text-sm font-bold transition-all duration-300 ${formData.type === type ? 'bg-purple-600 border-purple-600 text-white shadow-lg shadow-purple-500/30 scale-[1.02]' : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:bg-gray-50'}`}>{type}</button>
                   ))}
                </div>
             </div>

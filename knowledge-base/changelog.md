@@ -1,5 +1,87 @@
 # Changelog
 
+## 2026-06-26 - Added Manage Agents to Admin Dashboard
+**What**: Created an AdminAgents component and added a "Manage Agents" tab to the Admin Dashboard sidebar.
+**Why**: Allows the admin to visually create, edit, and delete real estate agents in the MongoDB database directly from the dashboard, instead of relying on seed scripts.
+**Files Changed**:
+- rontend/src/components/AdminAgents.jsx (New)
+- rontend/src/pages/AdminDashboard.jsx
+
+## 2026-06-26 - Migrated Agents to Database
+**What**: Created an Agent model in MongoDB, seeded the current hardcoded agents into the database, and refactored the TopAgents component to fetch the agents dynamically from the newly created /api/agents endpoint.
+**Why**: Moving agents to the database allows them to be dynamically updated, added, or removed without requiring a frontend code change and redeployment.
+**Files Changed**:
+- ackend/models/Agent.js (New)
+- ackend/routes/agentRoutes.js (New)
+- ackend/seedAgents.js (New)
+- ackend/index.js
+- rontend/src/components/TopAgents.jsx
+
+## 2026-06-26 - Unified Property Types with Search Bar
+**What**: Updated the dynamic property types map to exactly match the types defined in the main Hero search bar component.
+**Why**: Ensures consistency across the platform. Users posting properties will now select the exact same types (e.g., 'Warehouse Space', 'Industrial Plot') that buyers are searching for on the homepage.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Dynamic Category-wise Property Types
+**What**: Updated the "PROPERTY TYPE" section to render dynamic options based on the currently selected "PROPERTY CATEGORY".
+**Why**: Previously, the Property Types (Warehouse / Godown, Factory / Shed) were hardcoded and remained the same across all categories. Now, they perfectly map to their respective categories (e.g., Office Space and Retail Shop for Commercial, Logistics Park for Warehouse).
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Auto-calculated Price Per Sq Ft
+**What**: Added an automatic calculation feature that updates the "PRICE / SQ FT" field dynamically. 
+**Why**: Reduces manual calculation errors. The system automatically watches the PRICE, PRICE UNIT, TOTAL AREA, and AREA UNIT fields, and calculates the exact price per square foot (handling all unit conversions like Acres/Hectares to SqFt and Lakhs/Crores to raw rupees) in real-time.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Separated Area Inputs
+**What**: Completely split the "TOTAL AREA" field into two distinct UI fields side-by-side: "TOTAL AREA" (number input) and "AREA UNIT" (dropdown).
+**Why**: Per user feedback, the split input methodology applied to prices should also apply to area values to enforce cleaner data entry. The inputs were separated into a 3-column grid beside POSSESSION STATUS.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Separated Price Inputs
+**What**: Completely split the combined "MONTHLY RENT / PRICE" field into two distinct UI fields side-by-side: "PRICE NUMERIC VALUE" (number input) and "PRICE UNIT" (dropdown).
+**Why**: Per user feedback, keeping them in a single combined box caused UX issues and didn't match the desired design. Separating them makes the form layout much cleaner and more explicit.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Fixed Price Input Field Typing Issue
+**What**: Changed the property price input type from 'text' to 'number' and ensured the click area isn't blocked by the ? symbol. 
+**Why**: Users were having trouble triggering the numeric keyboard (especially on mobile/tablet devices) and focusing the input field when tapping near the left side of the box.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Optimized Price Field Layout
+**What**: Increased the width of the "MONTHLY RENT / PRICE *" field by updating the grid layout, and restored the default dropdown arrow for the price unit select menu.
+**Why**: The price input and dropdown were feeling cramped, and the lack of a dropdown arrow made it look like a standard text input, confusing users. 
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Added Price Unit Dropdown
+**What**: Replaced the static text input for property prices with a robust number input and a dropdown for selecting the price unit (K, Lacs, Cr, etc.).
+**Why**: To improve user experience and ensure standard formatting of prices across the platform. This also prevents formatting issues such as the corrupted Rupee symbol we saw earlier.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+
+## 2026-06-26 - Fixed Corrupted Rupee Symbol Encoding
+**What**: Searched for and replaced the corrupted ₹ characters (which displayed as an ugly ,1 in some browsers) with the correct ? (Rupee) symbol across the entire frontend.
+**Why**: File encoding corruption during copy-pasting or saving caused the Indian Rupee symbol to display incorrectly before property prices in forms and property cards.
+**Files Changed**:
+- rontend/src/pages/UserPostProperty.jsx
+- rontend/src/pages/AdminPostProperty.jsx
+- rontend/src/pages/UserManageProperties.jsx
+- rontend/src/components/PopularLocalities.jsx
+
 ## 2026-06-26 - Updated Discover Properties Order
 **What**: Modified the DiscoverProperties component to set 'Commercial' as the default and first tab in the UI.
 **Why**: To prioritize commercial properties in the discovery section per user preference.

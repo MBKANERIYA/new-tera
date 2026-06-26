@@ -239,7 +239,7 @@ export default function UserManageProperties() {
                           <div className="flex-1 pt-1 space-y-1 text-[13px]">
                             <div className="flex">
                               <span className="w-16 text-gray-500">Price :</span>
-                              <span className="font-bold text-gray-900">â‚¹ {prop.price}</span>
+                              <span className="font-bold text-gray-900">₹ {prop.price}</span>
                             </div>
                             <div className="flex mt-1">
                               <span className="w-16 text-gray-500">Area :</span>

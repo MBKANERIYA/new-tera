@@ -23,9 +23,9 @@ export default function PopularLocalities() {
       projects: '51 Projects',
       rating: '5.0',
       reviews: '4 Reviews',
-      buyPrice: 'â‚¹ 57499/ sq.ft',
+      buyPrice: '₹ 57499/ sq.ft',
       buyText: '1569 Property for Sale in Okhla...',
-      rentPrice: 'â‚¹ 18649/ sq.ft',
+      rentPrice: '₹ 18649/ sq.ft',
       rentText: '71 Property for Rent in Okhla...'
     },
     {
@@ -34,9 +34,9 @@ export default function PopularLocalities() {
       projects: '8 Projects',
       rating: '5.0',
       reviews: '4 Reviews',
-      buyPrice: 'â‚¹ 16400/ sq.ft',
+      buyPrice: '₹ 16400/ sq.ft',
       buyText: '858 Property for Sale in Sector 83...',
-      rentPrice: 'â‚¹ 747/ sq.ft',
+      rentPrice: '₹ 747/ sq.ft',
       rentText: '44 Property for Rent in Sector 83...'
     },
     {
@@ -45,9 +45,9 @@ export default function PopularLocalities() {
       projects: '11 Projects',
       rating: '5.0',
       reviews: '6 Reviews',
-      buyPrice: 'â‚¹ 33369/ sq.ft',
+      buyPrice: '₹ 33369/ sq.ft',
       buyText: '852 Property for Sale in Sector 82...',
-      rentPrice: 'â‚¹ 6681/ sq.ft',
+      rentPrice: '₹ 6681/ sq.ft',
       rentText: '106 Property for Rent in Sector 82...'
     },
     {
@@ -56,9 +56,9 @@ export default function PopularLocalities() {
       projects: '24 Projects',
       rating: '4.8',
       reviews: '12 Reviews',
-      buyPrice: 'â‚¹ 45000/ sq.ft',
+      buyPrice: '₹ 45000/ sq.ft',
       buyText: '320 Property for Sale in Udyog...',
-      rentPrice: 'â‚¹ 12000/ sq.ft',
+      rentPrice: '₹ 12000/ sq.ft',
       rentText: '85 Property for Rent in Udyog...'
     },
     {
@@ -67,9 +67,9 @@ export default function PopularLocalities() {
       projects: '42 Projects',
       rating: '4.9',
       reviews: '18 Reviews',
-      buyPrice: 'â‚¹ 28500/ sq.ft',
+      buyPrice: '₹ 28500/ sq.ft',
       buyText: '620 Property for Sale in Sector 62...',
-      rentPrice: 'â‚¹ 8500/ sq.ft',
+      rentPrice: '₹ 8500/ sq.ft',
       rentText: '150 Property for Rent in Sector 62...'
     },
     {
@@ -78,9 +78,9 @@ export default function PopularLocalities() {
       projects: '15 Projects',
       rating: '4.7',
       reviews: '9 Reviews',
-      buyPrice: 'â‚¹ 12000/ sq.ft',
+      buyPrice: '₹ 12000/ sq.ft',
       buyText: '412 Property for Sale in Manesar...',
-      rentPrice: 'â‚¹ 450/ sq.ft',
+      rentPrice: '₹ 450/ sq.ft',
       rentText: '68 Property for Rent in Manesar...'
     },
     {
@@ -89,9 +89,9 @@ export default function PopularLocalities() {
       projects: '30 Projects',
       rating: '4.6',
       reviews: '22 Reviews',
-      buyPrice: 'â‚¹ 22000/ sq.ft',
+      buyPrice: '₹ 22000/ sq.ft',
       buyText: '510 Property for Sale in Faridabad...',
-      rentPrice: 'â‚¹ 6000/ sq.ft',
+      rentPrice: '₹ 6000/ sq.ft',
       rentText: '95 Property for Rent in Faridabad...'
     }
   ];

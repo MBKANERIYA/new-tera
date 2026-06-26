@@ -8,6 +8,7 @@ import inquiryRoutes from './routes/inquiryRoutes.js';
 import blogRoutes from './routes/blogs.js';
 import testimonialRoutes from './routes/testimonials.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import agentRoutes from './routes/agentRoutes.js';
 
 dotenv.config();
 
@@ -24,12 +25,14 @@ app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/agents', agentRoutes);
 
 app.use('/properties', propertyRoutes);
 app.use('/auth', authRoutes);
 app.use('/inquiries', inquiryRoutes);
 app.use('/blogs', blogRoutes);
 app.use('/testimonials', testimonialRoutes);
+app.use('/agents', agentRoutes);
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)

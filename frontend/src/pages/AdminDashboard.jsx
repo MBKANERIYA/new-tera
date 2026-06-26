@@ -7,6 +7,7 @@ import {
 import { generatePropertyUrl } from '../utils/slug';
 import AdminBlogs from '../components/AdminBlogs';
 import AdminTestimonials from '../components/AdminTestimonials';
+import AdminAgents from '../components/AdminAgents';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -144,6 +145,14 @@ export default function AdminDashboard() {
                 <MessageSquare size={18} />
                 <span className="text-[14px]">Testimonials</span>
               </button>
+
+              <button 
+                onClick={() => setActiveTab('agents')}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${activeTab === 'agents' ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+              >
+                <Building size={18} />
+                <span className="text-[14px]">Manage Agents</span>
+              </button>
             </div>
           </div>
 
@@ -200,6 +209,7 @@ export default function AdminDashboard() {
           
           {activeTab === 'blogs' && <AdminBlogs />}
           {activeTab === 'testimonials' && <AdminTestimonials />}
+          {activeTab === 'agents' && <AdminAgents />}
 
           {(activeTab === 'inventory' || activeTab === 'submissions') && (
             <>

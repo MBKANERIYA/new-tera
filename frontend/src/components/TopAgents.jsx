@@ -1,4 +1,4 @@
-﻿import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 export default function TopAgents() {
@@ -16,108 +16,25 @@ export default function TopAgents() {
     }
   };
 
-  const agents = [
-    {
-      id: 1,
-      name: "JBN RealTech",
-      location: "Okhla Phase 1, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&h=100&fit=crop",
-      sale: 6,
-      rent: 0,
-      tags: ["Sector 2", "Okhla"],
-      moreTags: 0
-    },
-    {
-      id: 2,
-      name: "Gravitas Real Estate",
-      location: "Sector 48, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=100&h=100&fit=crop",
-      sale: 18,
-      rent: 0,
-      tags: ["Badli", "Dwarka Expressway"],
-      moreTags: 38
-    },
-    {
-      id: 3,
-      name: "Saral Realtors",
-      location: "Sector 47, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=100&h=100&fit=crop",
-      sale: 92,
-      rent: 6,
-      tags: ["DLF Phase I", "DLF Phase II"],
-      moreTags: 40
-    },
-    {
-      id: 4,
-      name: "Gurugram Luxury Floors",
-      location: "Sector 38, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop",
-      sale: 23,
-      rent: 2,
-      tags: ["Delhi", "Gurgaon"],
-      moreTags: 0
-    },
-    {
-      id: 5,
-      name: "Welcome Homes",
-      location: "Sector 70, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=100&h=100&fit=crop",
-      sale: 81,
-      rent: 4,
-      tags: ["Ansal Palam Vihar"],
-      moreTags: 37
-    },
-    {
-      id: 6,
-      name: "RBR Realty",
-      location: "DLF Phase IV, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop",
-      sale: 118,
-      rent: 70,
-      tags: ["Block A", "Block C"],
-      moreTags: 11
-    },
-    {
-      id: 7,
-      name: "Garv Design & Planning",
-      location: "Sector 46, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=100&h=100&fit=crop",
-      sale: 28,
-      rent: 0,
-      tags: ["Delhi", "Gurgaon", "Jhajjar"],
-      moreTags: 0
-    },
-    {
-      id: 8,
-      name: "Realty Choice",
-      location: "Sector 47, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=100&h=100&fit=crop",
-      sale: 932,
-      rent: 144,
-      tags: ["Block A Sector 63", "Block C"],
-      moreTags: 97
-    },
-    {
-      id: 9,
-      name: "Prime Industrial Spaces",
-      location: "Manesar, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?w=100&h=100&fit=crop",
-      sale: 45,
-      rent: 12,
-      tags: ["IMT Manesar", "Sector 8"],
-      moreTags: 5
-    },
-    {
-      id: 10,
-      name: "Capital Commercials",
-      location: "Connaught Place, Delhi NCR",
-      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&h=100&fit=crop",
-      sale: 156,
-      rent: 89,
-      tags: ["CP", "Barakhamba"],
-      moreTags: 22
-    }
-  ];
+  const [agents, setAgents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/agents')
+      .then(res => res.json())
+      .then(data => {
+        setAgents(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching agents:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div className="w-full py-16 text-center text-gray-500">Loading agents...</div>;
+  }
 
   return (
     <section className="w-full bg-[#f8f9fa] py-16 px-4 relative">
@@ -148,7 +65,7 @@ export default function TopAgents() {
           >
             {agents.map((agent) => (
               <div 
-                key={agent.id} 
+                key={agent._id || agent.id} 
                 className="w-[320px] bg-white rounded-lg shadow-sm border border-gray-100 p-5 flex flex-col justify-between snap-start hover:shadow-md transition-shadow"
               >
                 
