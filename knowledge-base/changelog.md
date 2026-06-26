@@ -1,4 +1,10 @@
-﻿# Changelog
+# Changelog
+
+## 2026-06-26 — Initialized Git Repository and Pushed to GitHub
+**What**: Initialized git, added a root `.gitignore`, committed all files, and pushed the codebase to the `new-tera` GitHub repository.
+**Why**: User requested to push the local codebase to their GitHub repository for version control and remote backup.
+**Files Changed**:
+- `.gitignore`: Created a root-level ignore file to prevent sensitive data (`.env`, `node_modules`, etc.) from being tracked.
 
 ## 2026-06-25 — Added Inquiry System
 **What**: Created an end-to-end property inquiry system allowing users to contact property owners.
