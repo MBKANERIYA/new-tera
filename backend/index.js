@@ -14,10 +14,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Routes — mounted at both /api/* (for local dev) and /* (for Vercel where routePrefix strips /api)
 app.use('/api/properties', propertyRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/properties', propertyRoutes);
+app.use('/auth', authRoutes);
+app.use('/inquiries', inquiryRoutes);
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
