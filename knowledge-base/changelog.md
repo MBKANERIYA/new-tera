@@ -1,5 +1,11 @@
 # Changelog
 
+### 2026-06-26 — Updated Most Viewed Properties Grid
+**What**: Updated the "Most Viewed Properties" component on the homepage to display the exact property subtypes used in the hero search functionality, and linked the cards to properly filter the properties page.
+**Why**: User requested that the grid only show the subtypes provided in the search functionality (e.g. Industrial Plot, Warehouse Space, Office Space). Connecting the links to the actual search filter creates a much better user experience.
+**Files Changed**:
+- `frontend/src/components/MostViewedProperties.jsx`: Replaced hardcoded properties with the 8 specific subtypes from `Hero.jsx` and updated the `Link` to use the `?propertyType=` URL parameter.
+
 ### 2026-06-26 — Fixed Vercel API Routing
 **What**: Reverted frontend API fetch calls to `/api/...` and updated `vercel.json` backend `routePrefix` to `/api`.
 **Why**: Using the arbitrary `/_/backend` route prefix resulted in Express receiving mismatched URL routes, causing it to return 404s (which manifested as HTML `<` syntax errors in the frontend). Changing the prefix directly to `/api` ensures frontend requests seamlessly match the backend Express routing logic.
