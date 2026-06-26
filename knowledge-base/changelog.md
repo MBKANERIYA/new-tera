@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-06-26 - Updated Discover Properties Order
+**What**: Modified the DiscoverProperties component to set 'Commercial' as the default and first tab in the UI.
+**Why**: To prioritize commercial properties in the discovery section per user preference.
+**Files Changed**:
+- rontend/src/components/DiscoverProperties.jsx: Updated ctiveFilter initial state and ilters array.
+
 ## 2026-06-26 - Added City to Property Schema
 **What**: Explicitly added the city field to the Mongoose Property schema.
 **Why**: To ensure the database properly enforces and recognizes the city attribute for every property listing, enabling accurate city-based filtering and display across the application.

@@ -3,12 +3,12 @@ import { ChevronRight, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function DiscoverProperties() {
-  const [activeFilter, setActiveFilter] = useState('Industrial');
+  const [activeFilter, setActiveFilter] = useState('Commercial');
   const [activeSidebar, setActiveSidebar] = useState('Properties for Sale');
   const navigate = useNavigate();
   const sliderRef = useRef(null);
   
-  const filters = ['Industrial', 'Warehouse', 'Commercial'];
+  const filters = ['Commercial', 'Industrial', 'Warehouse'];
 
   const sidebarOptions = [
     {
