@@ -1,5 +1,11 @@
 # Changelog
 
+### 2026-06-26 — Resolved Vercel NPM Build Conflict
+**What**: Added an `overrides` field in `backend/package.json` to resolve a peer dependency conflict between `cloudinary` and `multer-storage-cloudinary`.
+**Why**: Vercel's build process failed with an `ERESOLVE` error because `multer-storage-cloudinary@4.0.0` expects `cloudinary@^1.21.0` (v1), but the project uses `cloudinary@2.10.0` (v2). Adding the override forces npm to accept the newer v2 version without breaking the build.
+**Files Changed**:
+- `backend/package.json`: Added `"overrides": { "multer-storage-cloudinary": { "cloudinary": "$cloudinary" } }`.
+
 ### 2026-06-26 — Fixed Vercel Build Configuration
 **What**: Updated `vercel.json` backend service configuration with required `builder` and `entrypoint`.
 **Why**: Vercel rejected the initial configuration during build because the backend service lacked explicit instructions on how to process the Node.js application.
