@@ -297,7 +297,7 @@ export default function PropertyDetails() {
             {/* Location Map */}
             <div className="bg-white p-1 rounded shadow-sm border border-gray-100 overflow-hidden h-[300px]">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d14006.113203995874!2d77.1408801!3d28.643908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d02df5d5c0e2f%3A0xe5eb6c4296eb4c58!2sRama%20Rd%2C%20Industrial%20Area%2C%20Kirti%20Nagar%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location + ', ' + property.city)}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

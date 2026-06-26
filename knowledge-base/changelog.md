@@ -1,5 +1,12 @@
 # Changelog
 
+### 2026-06-26 — Fixed Property Details Page & Seeder
+**What**: Enriched the database seeder to include detailed property specifications, and fixed the broken Google Maps iframe on the property details page.
+**Why**: The property details page had blank sections for "Detailed Specifications" and "Facilities & Specs" because the dummy data lacked these fields. The Google Map was failing with an "Invalid pb parameter" error because it used a broken, hard-coded static embed URL.
+**Files Changed**:
+- `backend/seed.js`: Added `categoryData`, `facilities`, and `specs` fields to the generated properties.
+- `frontend/src/pages/PropertyDetails.jsx`: Replaced the broken static Google Maps iframe URL with a dynamic search query map (`https://maps.google.com/maps?q=...`) that automatically drops a pin on the property's real location.
+
 ### 2026-06-26 — Updated Most Viewed Properties Grid
 **What**: Updated the "Most Viewed Properties" component on the homepage to display the exact property subtypes used in the hero search functionality, and linked the cards to properly filter the properties page.
 **Why**: User requested that the grid only show the subtypes provided in the search functionality (e.g. Industrial Plot, Warehouse Space, Office Space). Connecting the links to the actual search filter creates a much better user experience.
