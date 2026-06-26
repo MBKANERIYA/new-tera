@@ -1,12 +1,11 @@
 # Changelog
 
-## 2026-06-26 — Configured Project for Vercel Deployment
+### 2026-06-26 — Configured Project for Vercel Deployment
 **What**: Prepared the frontend and backend for deployment on Vercel as a single monorepo project.
-**Why**: User requested to deploy the application on Vercel, which required specific configuration for routing, API calls, and Serverless Functions compatibility.
+**Why**: User requested to deploy the application on Vercel using `experimentalServices`, which required specific configuration for routing and API calls.
 **Files Changed**:
-- `vercel.json`: Created at the root directory to define build configurations (`@vercel/static-build` for frontend, `@vercel/node` for backend) and routing rules to map `/api/*` to the backend Express app and all other requests to the Vite SPA frontend.
-- `backend/index.js`: Exported the Express `app` instance using `export default app;` to satisfy Vercel Serverless requirements. Made `app.listen()` conditional so it only runs in local environments.
-- `frontend/src/**/*.jsx`: Stripped all hardcoded `http://localhost:5001/api` URLs from `fetch` calls, replacing them with dynamic relative paths (`/api/...`). This ensures the app seamlessly hits Vercel Serverless Functions in production while working locally.
+- `vercel.json`: Replaced the legacy `builds` configuration with the `experimentalServices` snippet provided by the user, mapping the frontend to `/` and the backend to `/_/backend`.
+- `frontend/src/**/*.jsx`: Stripped all hardcoded `http://localhost:5001/api` URLs from `fetch` calls, replacing them with dynamic relative paths (`/_/backend/api/...`). This ensures the app seamlessly hits Vercel Serverless Functions in production while working locally.y.
 - `frontend/vite.config.js`: Configured a local Vite development proxy to automatically route `/api` requests to the local Express backend running on port `5001`.
 
 ## 2026-06-26 — Initialized Git Repository and Pushed to GitHub

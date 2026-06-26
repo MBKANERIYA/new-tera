@@ -17,7 +17,7 @@ export default function UserEnquiries() {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
         
-        fetch(`/api/inquiries/${parsedUser.mobile}`)
+        fetch(`/_/backend/api/inquiries/${parsedUser.mobile}`)
           .then(res => res.json())
           .then(data => {
             setInquiries(data);

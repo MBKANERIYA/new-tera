@@ -18,7 +18,7 @@ export default function UserManageProperties() {
         setUser(parsedUser);
         
         // Fetch properties for this user
-        fetch('/api/properties')
+        fetch('/_/backend/api/properties')
           .then(res => res.json())
           .then(data => {
             const userProps = data.filter(p => p.submittedBy === parsedUser.mobile);
@@ -41,7 +41,7 @@ export default function UserManageProperties() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this property? This action cannot be undone.')) {
       try {
-        const res = await fetch(`/api/properties/${id}`, {
+        const res = await fetch(`/_/backend/api/properties/${id}`, {
           method: 'DELETE'
         });
         if (res.ok) {

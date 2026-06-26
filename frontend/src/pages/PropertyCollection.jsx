@@ -11,7 +11,7 @@ export default function PropertyCollection() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    fetch('/api/properties')
+    fetch('/_/backend/api/properties')
       .then(res => res.json())
       .then(data => {
         setPropertiesData(data.filter(p => p.status === 'approved'));
@@ -42,7 +42,7 @@ export default function PropertyCollection() {
     e.preventDefault();
     setInquiryStatus('submitting');
     try {
-      const res = await fetch('/api/inquiries', {
+      const res = await fetch('/_/backend/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

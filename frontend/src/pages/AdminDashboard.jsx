@@ -23,7 +23,7 @@ export default function AdminDashboard() {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('/api/properties');
+      const response = await fetch('/_/backend/api/properties');
       if (response.ok) {
         const data = await response.json();
         setProperties(data);
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
 
   const handleApprove = async (id) => {
     try {
-      const res = await fetch(`/api/properties/${id}`, {
+      const res = await fetch(`/_/backend/api/properties/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'approved' })
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
 
   const handleReject = async (id) => {
     try {
-      const res = await fetch(`/api/properties/${id}`, {
+      const res = await fetch(`/_/backend/api/properties/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'rejected' })
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this property?')) return;
     try {
-      const res = await fetch(`/api/properties/${id}`, {
+      const res = await fetch(`/_/backend/api/properties/${id}`, {
         method: 'DELETE'
       });
       if (res.ok) fetchProperties();
