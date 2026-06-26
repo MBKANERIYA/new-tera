@@ -1,5 +1,11 @@
 # Changelog
 
+### 2026-06-26 — Premium UI Upgrade for Property Details
+**What**: Completely redesigned the `PropertyDetails.jsx` page with a premium, modern aesthetic using advanced Tailwind CSS techniques.
+**Why**: User requested a "premium looking" property details page to match the high-quality industrial real estate brand.
+**Files Changed**:
+- `frontend/src/pages/PropertyDetails.jsx`: Implemented soft shadows, custom gradients, glassmorphism elements, dynamic hover animations, larger modern typography, and a polished sticky contact sidebar.
+
 ### 2026-06-26 — Fixed Property Details Page & Seeder
 **What**: Enriched the database seeder to include detailed property specifications, and fixed the broken Google Maps iframe on the property details page.
 **Why**: The property details page had blank sections for "Detailed Specifications" and "Facilities & Specs" because the dummy data lacked these fields. The Google Map was failing with an "Invalid pb parameter" error because it used a broken, hard-coded static embed URL.
