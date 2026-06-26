@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Building2, PhoneCall, Mail } from 'lucide-react';
 import Header from '../components/Header';
@@ -34,39 +34,62 @@ export default function ContactUs() {
           <div className="flex-1">
             <h1 className="text-[28px] font-bold text-[#333] mb-4">Get in Touch</h1>
             
-            <p className="text-[#555] text-[14px] leading-[1.6] mb-8">
-              Having Questions? Tell us about your Business, Our experts will check all the aspects and call you back to explain how Teralease would help you to get quotes for your Business.
-            </p>
-
-            <div className="mb-6">
-              <h2 className="text-[#0052cc] font-bold text-[16px] mb-1">Teralease Pvt. Ltd.</h2>
-              {/* <p className="text-[#555] text-[13px] mb-3">C/o Teralease Pvt. Ltd.</p> */}
+            <div className="flex flex-col gap-8">
               
-              <div className="flex items-start gap-3 mt-4">
-                <Building2 className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
-                <p className="text-[#555] text-[13px] leading-[1.6]">
-                  33 & 33A, Rama Road, Industrial Area, Near Kirti Nagar Metro Station, New Delhi, Delhi, India, Pin - 110015
-                </p>
-              </div>
-            </div>
-
-            <div className="border-t border-[#e0e0e0] my-6"></div>
-
-            <div className="mb-4">
-              <p className="text-[#333] text-[13px] mb-1">For any assistance call us at</p>
-              <p className="text-[#777] text-[12px] mb-4">( 9:30 AM to 6:00 PM IST, Mon to Sat )</p>
-              
-              <div className="flex items-center gap-3 mb-4">
-                <PhoneCall className="w-5 h-5 text-[#d9534f]" />
-                <p className="text-[14px]">
-                  <strong className="text-[#333]">India</strong> <span className="text-[#555]">+91-8929175327</span>
-                </p>
+              {/* Office Address */}
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 rounded-full border border-orange-200 flex items-center justify-center shrink-0">
+                  <Building2 className="w-5 h-5 text-orange-400" strokeWidth={1.5} />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-[#0a192f] font-semibold text-[16px] mb-2">Office Address</h3>
+                  <p className="text-[#666] text-[14px] leading-relaxed">
+                    1546, Near Subhash Chowk, Sector 6A, Dharuhera, Haryana - 123110
+                  </p>
+                </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#d9534f]" />
-                <a href="#" className="text-[#0052cc] text-[14px] hover:underline">Click here to share your queries / feedback</a>
+              {/* Phone */}
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 rounded-full border border-orange-200 flex items-center justify-center shrink-0">
+                  <PhoneCall className="w-5 h-5 text-orange-400" strokeWidth={1.5} />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-[#0a192f] font-semibold text-[16px] mb-2">Phone</h3>
+                  <p className="text-[#666] text-[14px]">
+                    +91 97197 17004
+                  </p>
+                </div>
               </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 rounded-full border border-orange-200 flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-orange-400" strokeWidth={1.5} />
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-[#0a192f] font-semibold text-[16px] mb-2">Email</h3>
+                  <a href="mailto:yamanyadavestate@gmail.com" className="text-[#666] text-[14px] hover:text-orange-500 transition-colors">
+                    yamanyadavestate@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Working Hours */}
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 rounded-full border border-orange-200 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <h3 className="text-[#0a192f] font-semibold text-[16px] mb-2">Working Hours</h3>
+                  <p className="text-[#666] text-[14px]">
+                    7 days in a week. 9:00 AM - 7:00 PM
+                  </p>
+                </div>
+              </div>
+
             </div>
             
           </div>
@@ -113,7 +136,7 @@ export default function ContactUs() {
               {/* Fake 360 View Controls overlay */}
               <div className="absolute top-4 left-4 bg-black/60 text-white p-2 rounded text-[11px] z-10">
                 <p className="font-bold mb-1">Teralease Pvt. Ltd.</p>
-                <p>33 & 33A, Rama Road Industrial Area</p>
+                <p>1546, Near Subhash Chowk, Sector 6A, Dharuhera</p>
               </div>
 
               {/* Fake Compass / Zoom controls (bottom right) */}

@@ -10,6 +10,11 @@ export default function UserManageProperties() {
   const [user, setUser] = useState(null);
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Filter States
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [sortOrder, setSortOrder] = useState('Newest First');
+  const [statusFilter, setStatusFilter] = useState('All');
 
   useEffect(() => {
     const storedUser = localStorage.getItem('property_user');
@@ -55,6 +60,28 @@ export default function UserManageProperties() {
   };
 
   if (!user) return null;
+
+  // Filter & Sort Logic
+  let processedProperties = [...properties];
+
+  // Apply Status Filter
+  if (statusFilter !== 'All') {
+    processedProperties = processedProperties.filter(p => {
+      if (statusFilter === 'Active') return p.status === 'approved';
+      if (statusFilter === 'Pending') return p.status === 'pending';
+      return true;
+    });
+  }
+
+  // Apply Sort
+  processedProperties.sort((a, b) => {
+    const dateA = new Date(a.createdAt).getTime();
+    const dateB = new Date(b.createdAt).getTime();
+    return sortOrder === 'Newest First' ? dateB - dateA : dateA - dateB;
+  });
+
+  // Apply Pagination (Items per page)
+  const displayedProperties = processedProperties.slice(0, itemsPerPage);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f5f7]">
@@ -123,7 +150,7 @@ export default function UserManageProperties() {
             {/* Table Header Controls */}
             <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
               <div className="flex items-center gap-4 text-sm text-gray-600">
-                <span className="font-bold">{properties.length} Properties</span>
+                <span className="font-bold">{processedProperties.length} Properties</span>
                 <label className="flex items-center gap-1.5 cursor-pointer">
                   <input type="checkbox" className="rounded border-gray-300 text-[#000000] focus:ring-[#000000]" />
                   Select All
@@ -132,19 +159,31 @@ export default function UserManageProperties() {
               </div>
               
               <div className="flex items-center gap-3">
-                <select className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none">
-                  <option>10</option>
-                  <option>20</option>
-                  <option>50</option>
+                <select 
+                  value={itemsPerPage}
+                  onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                  className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none cursor-pointer"
+                >
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
                 </select>
-                <select className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none">
-                  <option>Newest First</option>
-                  <option>Oldest First</option>
+                <select 
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none cursor-pointer"
+                >
+                  <option value="Newest First">Newest First</option>
+                  <option value="Oldest First">Oldest First</option>
                 </select>
-                <select className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none">
-                  <option>All ({properties.length})</option>
-                  <option>Active</option>
-                  <option>Pending</option>
+                <select 
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="border border-gray-300 text-sm rounded px-2 py-1.5 focus:ring-[#000000] focus:border-[#000000] outline-none cursor-pointer"
+                >
+                  <option value="All">All ({properties.length})</option>
+                  <option value="Active">Active</option>
+                  <option value="Pending">Pending</option>
                 </select>
               </div>
             </div>
@@ -167,8 +206,13 @@ export default function UserManageProperties() {
                    <p className="text-gray-400 text-sm mt-1">You haven't posted any properties yet.</p>
                    <button onClick={() => navigate('/user/post-property')} className="mt-4 px-6 py-2 bg-[#000000] text-white rounded font-medium hover:bg-[#515A63] transition-colors">Post Property</button>
                 </div>
+              ) : displayedProperties.length === 0 ? (
+                <div className="p-10 text-center flex flex-col items-center">
+                   <p className="text-gray-500 font-medium text-lg">No properties match your filters.</p>
+                   <button onClick={() => setStatusFilter('All')} className="mt-4 text-blue-600 hover:underline">Clear Filters</button>
+                </div>
               ) : (
-                properties.map(prop => (
+                displayedProperties.map(prop => (
                   <div key={prop._id} className="grid grid-cols-[1fr_200px_180px] p-4 group hover:bg-gray-50/50 transition-colors">
                     
                     {/* Property Details */}
@@ -254,12 +298,14 @@ export default function UserManageProperties() {
             
             {/* Table Footer Pagination */}
             {properties.length > 0 && (
-              <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex justify-between items-center text-sm text-gray-500">
-                <div>Showing 1 to {properties.length} of {properties.length} entries</div>
-                <div className="flex items-center gap-1">
-                  <button className="w-8 h-8 flex items-center justify-center bg-[#000000] text-white rounded">1</button>
-                </div>
+              <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 text-sm text-gray-500 flex justify-between items-center">
+              <div>
+                Showing 1 to {displayedProperties.length} of {processedProperties.length} entries
               </div>
+              <div className="flex gap-1">
+                <button className="px-3 py-1 bg-[#000000] text-white rounded text-xs font-bold">1</button>
+              </div>
+            </div>
             )}
             
           </div>

@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import Testimonials from './pages/Testimonials';
+import FAQ from './pages/FAQ';
+import BlogDetails from './pages/BlogDetails';
 import PropertyDetails from './pages/PropertyDetails';
 import PropertyCollection from './pages/PropertyCollection';
 import AdminLogin from './pages/AdminLogin';
@@ -21,6 +24,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
         <Route path="/property/:id" element={<PropertyDetails />} />
         <Route path="/property/:slug/:id" element={<PropertyDetails />} />
         <Route path="/properties" element={<PropertyCollection />} />

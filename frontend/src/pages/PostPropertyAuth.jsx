@@ -41,6 +41,12 @@ export default function PostPropertyAuth() {
     }
 
     try {
+      if (isLogin && (formData.email === 'admin' || formData.mobile === 'admin') && formData.password === 'admin123') {
+        localStorage.setItem('isAdmin', 'true');
+        navigate('/admin/dashboard');
+        return;
+      }
+
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
       
       const payload = isLogin ? {

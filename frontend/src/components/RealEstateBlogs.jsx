@@ -1,33 +1,24 @@
-﻿import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function RealEstateBlogs() {
-  const blogs = [
-    {
-      id: 1,
-      title: 'Delhi NCR Commercial Properties Under 5 Cr: Best Areas & Buying Guide',
-      excerpt: 'The commercial real estate prices in Delhi NCR are known to be skyrocketing, and although it is...',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=300&fit=crop'
-    },
-    {
-      id: 2,
-      title: 'Tips to Lease your Warehouse in Delhi NCR in No Time',
-      excerpt: 'Delhi NCR is rapidly becoming a logistics hub with its expanding infrastructure and rapid...',
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?w=500&h=300&fit=crop'
-    },
-    {
-      id: 3,
-      title: 'Upcoming Industrial Corridors around Delhi NCR',
-      excerpt: 'The expanding industrial corridors have transformed the way businesses operate within the National...',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=300&fit=crop'
-    },
-    {
-      id: 4,
-      title: 'Commercial Property Registration: Details, Documents, Process and Charges',
-      excerpt: 'Purchasing a commercial space in India is regarded as a significant milestone, a kind of success tha...',
-      image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=500&h=300&fit=crop'
-    }
-  ];
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/blogs')
+      .then(res => res.json())
+      .then(data => {
+        setBlogs(data.slice(0, 4));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching blogs:', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <section className="w-full bg-white py-16 px-4 border-t border-gray-100">
@@ -41,9 +32,12 @@ export default function RealEstateBlogs() {
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {blogs.map((blog) => (
+          {loading ? (
+            <div className="col-span-4 text-center py-10 text-gray-500">Loading blogs...</div>
+          ) : blogs.map((blog) => (
             <div 
-              key={blog.id} 
+              key={blog._id} 
+              onClick={() => navigate(`/blog/${blog._id}`)}
               className="bg-white border border-gray-200 rounded-[2px] overflow-hidden group cursor-pointer hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)] hover:border-gray-300 transition-all duration-300 flex flex-col"
             >
               

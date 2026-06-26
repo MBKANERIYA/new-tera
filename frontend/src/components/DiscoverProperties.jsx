@@ -1,9 +1,12 @@
-﻿import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function DiscoverProperties() {
   const [activeFilter, setActiveFilter] = useState('Industrial');
   const [activeSidebar, setActiveSidebar] = useState('Properties for Sale');
+  const navigate = useNavigate();
+  const sliderRef = useRef(null);
   
   const filters = ['Industrial', 'Warehouse', 'Commercial'];
 
@@ -23,17 +26,43 @@ export default function DiscoverProperties() {
   ];
 
   const propertyCards = [
-    { id: 1, title: "Industrial Plots", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
-    { id: 2, title: "Warehouse Spaces", image: "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=600" },
-    { id: 3, title: "Commercial Offices", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" },
-    { id: 4, title: "Commercial Land", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=600" },
-    { id: 5, title: "IT Park Spaces", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600" },
-    { id: 6, title: "Logistics Hubs", image: "https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?auto=format&fit=crop&q=80&w=600" },
-    { id: 7, title: "Factory Sheds", image: "https://images.pexels.com/photos/1204457/pexels-photo-1204457.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    { id: 8, title: "Co-working Spaces", image: "https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&fit=crop&q=80&w=600" },
-    { id: 9, title: "Retail Shops", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=600" },
-    { id: 10, title: "Cold Storage", image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=600" }
+    { id: 1, title: "Industrial Plot", category: "Industrial", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
+    { id: 2, title: "Industrial Workspace", category: "Industrial", image: "https://images.unsplash.com/photo-1565651583091-a67b458db49b?auto=format&fit=crop&q=80&w=600" },
+    { id: 3, title: "Warehouse Space", category: "Warehouse", image: "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=600" },
+    { id: 4, title: "Godown", category: "Warehouse", image: "https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?auto=format&fit=crop&q=80&w=600" },
+    { id: 5, title: "Office Space", category: "Commercial", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" },
+    { id: 6, title: "Retail Shop", category: "Commercial", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=600" },
+    { id: 7, title: "Commercial Land", category: "Commercial", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=600" },
+    { id: 8, title: "Agriculter Land", category: "Commercial", image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&q=80&w=600" }
   ];
+
+  const getListingType = (sidebarTitle) => {
+    if (sidebarTitle.includes('Sale')) return 'Sale';
+    if (sidebarTitle.includes('Sublease')) return 'Sub-Lease';
+    return 'Lease';
+  };
+
+  const handleViewAll = () => {
+    navigate(`/properties?listingType=${getListingType(activeSidebar)}`);
+  };
+
+  const handleCardClick = (cardTitle) => {
+    navigate(`/properties?propertyType=${encodeURIComponent(cardTitle)}&listingType=${getListingType(activeSidebar)}`);
+  };
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -336, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: 336, behavior: 'smooth' });
+    }
+  };
+
+  const filteredCards = propertyCards.filter(card => card.category === activeFilter);
 
   return (
     <section className="w-full bg-[#f8f9fa] py-12 px-4 border-t border-gray-200">
@@ -80,7 +109,7 @@ export default function DiscoverProperties() {
                         <p className="text-[13px] text-[#666] leading-relaxed mb-4">
                           {option.description}
                         </p>
-                        <button className="border border-gray-300 px-4 py-1.5 rounded-[2px] text-[12px] text-[#333] font-medium hover:bg-gray-50 transition-colors">
+                        <button onClick={handleViewAll} className="border border-gray-300 px-4 py-1.5 rounded-[2px] text-[12px] text-[#333] font-medium hover:bg-gray-50 transition-colors">
                           View All
                         </button>
                       </div>
@@ -113,11 +142,21 @@ export default function DiscoverProperties() {
 
             {/* Image Slider */}
             <div className="relative group overflow-hidden w-full">
-              <div className="flex gap-4 overflow-x-auto no-scrollbar h-[320px] snap-x">
-                {propertyCards.map((card) => (
+              
+              {/* Left Scroll Arrow */}
+              <button 
+                onClick={scrollLeft}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white rounded-full p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 border border-gray-100 hidden md:flex items-center justify-center text-gray-600 hover:text-black hover:scale-105 transition-all opacity-0 group-hover:opacity-100"
+              >
+                <ChevronRight size={22} strokeWidth={2.5} className="rotate-180" />
+              </button>
+
+              <div ref={sliderRef} className="flex gap-4 overflow-x-auto no-scrollbar h-[320px] snap-x transition-all duration-300 scroll-smooth">
+                {filteredCards.map((card) => (
                   <div 
                     key={card.id} 
-                    className="w-full md:w-[320px] h-full relative rounded-[2px] overflow-hidden group/card cursor-pointer snap-start flex-shrink-0"
+                    onClick={() => handleCardClick(card.title)}
+                    className="w-full md:w-[320px] h-full relative rounded-[2px] overflow-hidden group/card cursor-pointer snap-start flex-shrink-0 animate-in fade-in duration-500"
                   >
                     <img 
                       src={card.image} 
@@ -132,8 +171,11 @@ export default function DiscoverProperties() {
                 ))}
               </div>
 
-              {/* Right Scroll Arrow (Desktop only, decorative) */}
-              <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white rounded-full p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 border border-gray-100 hidden md:flex items-center justify-center text-gray-600 hover:text-black hover:scale-105 transition-all opacity-0 group-hover:opacity-100">
+              {/* Right Scroll Arrow */}
+              <button 
+                onClick={scrollRight}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white rounded-full p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.15)] z-10 border border-gray-100 hidden md:flex items-center justify-center text-gray-600 hover:text-black hover:scale-105 transition-all opacity-0 group-hover:opacity-100"
+              >
                 <ChevronRight size={22} strokeWidth={2.5} />
               </button>
             </div>

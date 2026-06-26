@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -9,10 +9,10 @@ export default function Footer() {
     { label: 'Feedback', path: '#' },
     { label: 'Complaints', path: '#' },
     { label: 'Terms & Conditions', path: '#' },
-    { label: 'Testimonials', path: '#' },
+    { label: 'Testimonials', path: '/testimonials' },
     { label: 'Sitemap', path: '#' },
     { label: 'Property Leads', path: '#' },
-    { label: 'FAQ', path: '#' },
+    { label: 'FAQ', path: '/faq' },
     { label: 'Advertise With Us', path: '#' }
   ];
 

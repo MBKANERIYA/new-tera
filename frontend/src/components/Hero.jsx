@@ -99,7 +99,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative z-20 w-full h-[450px] md:h-[520px] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
+      className="relative z-20 w-full h-[550px] md:h-[680px] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop")' }}
     >
       {/* Dark premium overlay to match black/silver theme */}
@@ -107,12 +107,17 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center mt-[-20px]">
 
+        {/* Platform Badge */}
+        <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/90 text-sm font-semibold tracking-wide mb-5 backdrop-blur-sm">
+          #1 Commercial Property Listing Platform
+        </div>
+
         {/* Premium Heading */}
-        <h1 className="text-[32px] md:text-[46px] text-white mb-3 font-bold text-center tracking-tight">
-          The Premier Real Estate Network in <span className="text-[#B3BCC5]">Delhi NCR</span>
+        <h1 className="text-[32px] md:text-[46px] text-white mb-4 font-bold text-center tracking-tight leading-tight">
+          Buy, Sell & Lease Premium Spaces in <span className="text-[#B3BCC5]">Delhi NCR</span>
         </h1>
-        <p className="text-gray-300 text-center mb-10 text-[15px] md:text-[17px] font-medium max-w-2xl">
-          Connect with elite agents, list premium properties, and discover exclusive spaces tailored for your business.
+        <p className="text-gray-300 text-center mb-10 text-[15px] md:text-[16px] font-medium max-w-3xl leading-relaxed">
+          Teralease is your trusted property listing platform dedicated to <strong>Industrial</strong>, <strong>Warehouse</strong>, and <strong>Commercial</strong> real estate. Easily list your properties to reach elite agents, or search our verified inventory to find the exact space your business needs to grow.
         </p>
 
         {/* Premium Search Box Container */}

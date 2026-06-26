@@ -1,7 +1,10 @@
 import React from 'react';
 import { ArrowRight, Timer, Building2, ShieldCheck, Warehouse } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function InfoCards() {
+  const navigate = useNavigate();
+  
   const cards = [
     {
       id: 1,
@@ -12,7 +15,8 @@ export default function InfoCards() {
       bgClass: "bg-gradient-to-br from-[#111111] to-[#222222]", 
       shadowClass: "hover:shadow-[0_15px_35px_rgba(17,17,17,0.4)]",
       textColor: "text-white",
-      icon: Timer
+      icon: Timer,
+      link: "/post-property"
     },
     {
       id: 2,
@@ -34,7 +38,8 @@ export default function InfoCards() {
       bgClass: "bg-gradient-to-br from-[#2D3748] to-[#1A202C]",
       shadowClass: "hover:shadow-[0_15px_35px_rgba(45,55,72,0.4)]",
       textColor: "text-white",
-      icon: ShieldCheck
+      icon: ShieldCheck,
+      link: "/properties?listingType=Sale"
     },
     {
       id: 4,
@@ -45,7 +50,8 @@ export default function InfoCards() {
       bgClass: "bg-gradient-to-br from-[#4A5568] to-[#2D3748]",
       shadowClass: "hover:shadow-[0_15px_35px_rgba(74,85,104,0.4)]",
       textColor: "text-white",
-      icon: Warehouse
+      icon: Warehouse,
+      link: "/properties?listingType=Lease"
     }
   ];
 
@@ -56,7 +62,8 @@ export default function InfoCards() {
           {cards.map((card) => (
             <div 
               key={card.id} 
-              className={`${card.bgClass} ${card.textColor} rounded-[16px] p-7 flex flex-col justify-between relative overflow-hidden group hover:-translate-y-2 ${card.shadowClass} transition-all duration-500 ease-out min-h-[220px] border border-white/10`}
+              onClick={() => card.link && navigate(card.link)}
+              className={`${card.bgClass} ${card.textColor} rounded-[16px] p-7 flex flex-col justify-between relative overflow-hidden group hover:-translate-y-2 ${card.shadowClass} transition-all duration-500 ease-out min-h-[220px] border border-white/10 ${card.link ? 'cursor-pointer' : ''}`}
             >
               {/* Glassmorphism shine effect */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>

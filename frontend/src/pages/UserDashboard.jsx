@@ -117,10 +117,13 @@ export default function UserDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             
             {/* Red Card */}
-            <div className="bg-[#707B87] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            <div 
+              onClick={() => navigate('/user/enquiries')}
+              className="bg-[#707B87] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300 cursor-pointer"
+            >
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Enquiries Received</span>
-                <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
+                <span className="text-[11px] opacity-90 hover:underline">More Info</span>
               </div>
               <div className="px-4 pb-4 flex justify-between items-end relative z-10">
                 <Mail size={48} strokeWidth={1} className="opacity-40" />
@@ -129,10 +132,13 @@ export default function UserDashboard() {
             </div>
 
             {/* Amber Card */}
-            <div className="bg-[#f59e0b] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            <div 
+              onClick={() => navigate('/user/dashboard')}
+              className="bg-[#f59e0b] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300 cursor-pointer"
+            >
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Buy Leads</span>
-                <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
+                <span className="text-[11px] opacity-90 hover:underline">More Info</span>
               </div>
               <div className="px-4 pb-4 flex justify-between items-end relative z-10">
                 <Building size={48} strokeWidth={1} className="opacity-40" />
@@ -140,11 +146,14 @@ export default function UserDashboard() {
               </div>
             </div>
 
-            {/* Blue Card */}
-            <div className="bg-[#000000] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            {/* Blue Card (Actually Black based on color) */}
+            <div 
+              onClick={() => navigate('/user/manage-properties')}
+              className="bg-[#000000] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300 cursor-pointer"
+            >
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Property for Sale</span>
-                <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
+                <span className="text-[11px] opacity-90 hover:underline">More Info</span>
               </div>
               <div className="px-4 pb-4 flex justify-between items-end relative z-10">
                 <Building size={48} strokeWidth={1} className="opacity-40" />
@@ -153,10 +162,13 @@ export default function UserDashboard() {
             </div>
 
             {/* Green Card */}
-            <div className="bg-[#10b981] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            <div 
+              onClick={() => navigate('/user/manage-properties')}
+              className="bg-[#10b981] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300 cursor-pointer"
+            >
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Property for Rent</span>
-                <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
+                <span className="text-[11px] opacity-90 hover:underline">More Info</span>
               </div>
               <div className="px-4 pb-4 flex justify-between items-end relative z-10">
                 <PlusCircle size={48} strokeWidth={1} className="opacity-40" />
@@ -171,14 +183,11 @@ export default function UserDashboard() {
             <button onClick={() => navigate('/user/post-property')} className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               Post Property <ChevronRight size={14} className="ml-1" />
             </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
+            <button onClick={() => navigate('/user/dashboard')} className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               My Profile <ChevronRight size={14} className="ml-1" />
             </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
+            <button onClick={() => navigate('/user/manage-properties')} className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               My Advertisements <ChevronRight size={14} className="ml-1" />
-            </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
-              Change Password <ChevronRight size={14} className="ml-1" />
             </button>
           </div>
 

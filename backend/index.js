@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import propertyRoutes from './routes/propertyRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import inquiryRoutes from './routes/inquiryRoutes.js';
+import blogRoutes from './routes/blogs.js';
+import testimonialRoutes from './routes/testimonials.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -18,9 +21,15 @@ app.use(express.json());
 app.use('/api/properties', propertyRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/upload', uploadRoutes);
+
 app.use('/properties', propertyRoutes);
 app.use('/auth', authRoutes);
 app.use('/inquiries', inquiryRoutes);
+app.use('/blogs', blogRoutes);
+app.use('/testimonials', testimonialRoutes);
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)

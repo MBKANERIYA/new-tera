@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-06-26 - Added Image Upload Functionality for Blogs and Testimonials
+**What**: Created a generic /api/upload endpoint in the backend and updated the AdminBlogs and AdminTestimonials UI to include a file input for image uploads instead of a text URL field.
+**Why**: The user wanted native image upload functionality so they can easily attach images directly from their device, rather than having to manually paste external image URLs.
+**Files Changed**:
+- ackend/routes/uploadRoutes.js: Created a new file using multer and CloudinaryStorage for general-purpose image uploads.
+- ackend/index.js: Mounted the /api/upload endpoint.
+- rontend/src/components/AdminBlogs.jsx: Replaced the "Image URL" text input with a file input and integrated Cloudinary image upload.
+- rontend/src/components/AdminTestimonials.jsx: Replaced the "Image URL" text input with a file input and integrated Cloudinary image upload.
+
+## 2026-06-26 - Added Admin Login Bypass & Contact Info Redesign, Migrated Blogs/Testimonials to DB
+**What**: Added direct admin login bypass on /post-property, redesigned contact us layout to match UI spec, created backend schemas and endpoints for blogs/testimonials, seeded data, and added full CRUD to Admin Dashboard.
+**Why**: User required direct admin login via the user portal form, exact replication of contact info UI layout, and dynamic management of currently hardcoded blog and testimonial content.
+**Files Changed**:
+- rontend/src/pages/PostPropertyAuth.jsx: Added admin credential interception.
+- rontend/src/pages/ContactUs.jsx: Redesigned contact layout with flex stacked rows and SVG icons.
+- ackend/models/Blog.js, ackend/models/Testimonial.js: Created Mongoose models.
+- ackend/routes/blogs.js, ackend/routes/testimonials.js: Created Express CRUD routes.
+- ackend/index.js: Mounted new routes.
+- ackend/seedExtras.js: Migrated hardcoded data to MongoDB.
+- rontend/src/components/RealEstateBlogs.jsx, rontend/src/pages/BlogDetails.jsx, rontend/src/components/TestimonialsSection.jsx: Refactored to fetch dynamic data.
+- rontend/src/pages/AdminDashboard.jsx, rontend/src/components/AdminBlogs.jsx, rontend/src/components/AdminTestimonials.jsx: Built new dashboard tabs with full add/edit/delete capability.
+
 ## 2026-06-26 — Premium Black & Silver Theme Upgrade
 **What**: Completely revamped the platform's color palette, typography, and landing page aesthetics to match a premium "Black and Silver" brand identity.
 **Why**: The user wanted to elevate the platform to feel highly premium for agents and property owners, inspired by a new black monochrome logo.
@@ -76,7 +98,9 @@
 **Files Changed**:
 - \rontend/src/pages/UserManageProperties.jsx\: Connected the 'Delete' button to the \DELETE /api/properties/:id\ endpoint and implemented state filtering upon successful deletion. Connected the 'Edit' button to navigate to \/user/edit-property/:id\.
 - \rontend/src/App.jsx\: Registered a new Route for \/user/edit-property/:id\ mapping to \UserPostProperty\.
-- \rontend/src/pages/UserPostProperty.jsx\: Refactored to support edit-mode workflows. Added \useParams\ to detect the presence of an ID in the route. Implemented a \useEffect\ hook to dynamically fetch the existing property by ID and populate all form fields (including nested \categoryData\, \extraFields\, and arrays). Added robust media tracking state (\existingGallery\, \emoveMain\, \emoveVideo\) to allow users to modify media gracefully. Updated \handleSubmit\ to conditionally use \PUT\ and point to \/api/properties/:id\ when updating an existing listing. Updated dynamic UI text for the 'Update' mode.
+- \rontend/src/pages/UserPostProperty.jsx\: Refactored to support edit-mode workflows. Added \useParams\ to detect the presence of an ID in the route. Implemented a \useEffect\ hook to dynamically fetch the existing property by ID and populate all form fields (including nested \categoryData\, \extraFields\, and arrays). Added robust media tracking state (\existingGallery\, \
+emoveMain\, \
+emoveVideo\) to allow users to modify media gracefully. Updated \handleSubmit\ to conditionally use \PUT\ and point to \/api/properties/:id\ when updating an existing listing. Updated dynamic UI text for the 'Update' mode.
 \
 ## 2026-06-25 — Added Automatic Navigation after Property Submission
 **What**: Updated UserPostProperty.jsx and AdminPostProperty.jsx to automatically navigate to the dashboard after a successful property submission.

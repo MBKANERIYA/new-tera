@@ -5,10 +5,12 @@ import {
   LogOut, Shield, Search, Eye, Edit, Trash2, CheckCircle, XCircle 
 } from 'lucide-react';
 import { generatePropertyUrl } from '../utils/slug';
+import AdminBlogs from '../components/AdminBlogs';
+import AdminTestimonials from '../components/AdminTestimonials';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('inventory'); // 'inventory', 'submissions'
+  const [activeTab, setActiveTab] = useState('inventory'); // 'inventory', 'submissions', 'blogs', 'testimonials'
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -116,22 +118,31 @@ export default function AdminDashboard() {
               
               <button 
                 onClick={() => setActiveTab('submissions')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl transition-all ${activeTab === 'submissions' ? 'bg-orange-50 text-orange-600 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${activeTab === 'submissions' ? 'bg-orange-50 text-orange-700 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
               >
                 <div className="flex items-center gap-3">
                   <Clock size={18} />
-                  <span className="text-[14px]">User Submissions</span>
+                  <span className="text-[14px]">Submissions</span>
                 </div>
                 <span className={`${activeTab === 'submissions' ? 'bg-orange-100 text-orange-600' : 'bg-orange-50 text-orange-500'} text-xs font-bold px-2 py-0.5 rounded-full`}>
                   {pendingProperties.length}
                 </span>
               </button>
 
-              <button className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:bg-gray-50 transition-all">
-                <div className="flex items-center gap-3">
-                  <MessageSquare size={18} />
-                  <span className="text-[14px]">Messages</span>
-                </div>
+              <button 
+                onClick={() => setActiveTab('blogs')}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${activeTab === 'blogs' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+              >
+                <LayoutGrid size={18} />
+                <span className="text-[14px]">Manage Blogs</span>
+              </button>
+
+              <button 
+                onClick={() => setActiveTab('testimonials')}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${activeTab === 'testimonials' ? 'bg-green-50 text-green-700 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+              >
+                <MessageSquare size={18} />
+                <span className="text-[14px]">Testimonials</span>
               </button>
             </div>
           </div>
@@ -187,8 +198,13 @@ export default function AdminDashboard() {
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-8">
           
-          {/* Metrics */}
-          <div className="grid grid-cols-4 gap-6 mb-8">
+          {activeTab === 'blogs' && <AdminBlogs />}
+          {activeTab === 'testimonials' && <AdminTestimonials />}
+
+          {(activeTab === 'inventory' || activeTab === 'submissions') && (
+            <>
+              {/* Metrics */}
+              <div className="grid grid-cols-4 gap-6 mb-8">
             <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex items-center gap-5">
               <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
                 <Building size={24} />
@@ -373,6 +389,9 @@ export default function AdminDashboard() {
             </div>
 
           </div>
+            </>
+          )}
+
         </div>
       </main>
 
