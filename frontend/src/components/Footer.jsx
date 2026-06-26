@@ -25,9 +25,9 @@ export default function Footer() {
           {links.map((link, index) => (
             <React.Fragment key={index}>
               {link.path.startsWith('/') ? (
-                <Link to={link.path} className="hover:text-blue-600 transition-colors">{link.label}</Link>
+                <Link to={link.path} className="hover:text-black transition-colors">{link.label}</Link>
               ) : (
-                <a href={link.path} className="hover:text-blue-600 transition-colors">{link.label}</a>
+                <a href={link.path} className="hover:text-black transition-colors">{link.label}</a>
               )}
               {index < links.length - 1 && <span className="text-gray-300">|</span>}
             </React.Fragment>

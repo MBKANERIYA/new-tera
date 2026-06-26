@@ -24,7 +24,7 @@ export default function MostViewedProperties() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Most Viewed Properties</span>{' '}
+          <span className="text-[#707B87] font-normal">Most Viewed Properties</span>{' '}
           <span className="text-[#333] font-medium">in Delhi NCR</span>
         </h2>
 

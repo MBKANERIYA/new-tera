@@ -10,7 +10,7 @@ export default function MarketOverview() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-8">
-          <span className="text-[#c82021] font-normal">An Overview of the Delhi NCR Real Estate</span>{' '}
+          <span className="text-[#707B87] font-normal">An Overview of the Delhi NCR Real Estate</span>{' '}
           <span className="text-[#333] font-medium">Market</span>
         </h2>
 
@@ -26,7 +26,7 @@ export default function MarketOverview() {
                 ... 
                 <button 
                   onClick={() => setIsExpanded(true)}
-                  className="text-blue-600 inline-flex items-center hover:underline ml-1"
+                  className="text-black inline-flex items-center hover:underline ml-1"
                 >
                   more <ChevronDown size={14} className="ml-0.5 mt-[2px]" />
                 </button>
@@ -37,7 +37,7 @@ export default function MarketOverview() {
                 {' '}available that cater to diverse business needs, ranging from start-up co-working spaces to massive manufacturing units. The future of real estate here continues to look incredibly promising as new corridors are developed.
                 <button 
                   onClick={() => setIsExpanded(false)}
-                  className="text-blue-600 inline-flex items-center hover:underline ml-1"
+                  className="text-black inline-flex items-center hover:underline ml-1"
                 >
                   less <ChevronUp size={14} className="ml-0.5 mt-[2px]" />
                 </button>

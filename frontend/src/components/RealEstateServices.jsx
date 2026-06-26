@@ -51,7 +51,7 @@ export default function RealEstateServices() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Real Estate Service</span>{' '}
+          <span className="text-[#707B87] font-normal">Real Estate Service</span>{' '}
           <span className="text-[#333] font-medium">in Delhi NCR</span>
         </h2>
 
@@ -63,7 +63,7 @@ export default function RealEstateServices() {
               className="bg-white border border-gray-100 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden flex flex-col p-6 min-h-[220px] group cursor-pointer"
             >
               {/* Content */}
-              <h3 className="text-[#333] font-medium text-[16px] mb-3 relative z-10 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-[#333] font-medium text-[16px] mb-3 relative z-10 group-hover:text-black transition-colors">
                 {service.title}
               </h3>
               

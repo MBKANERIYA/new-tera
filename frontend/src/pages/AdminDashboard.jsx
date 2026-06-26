@@ -4,6 +4,7 @@ import {
   Building, LayoutGrid, Clock, MessageSquare, Plus, ExternalLink, 
   LogOut, Shield, Search, Eye, Edit, Trash2, CheckCircle, XCircle 
 } from 'lucide-react';
+import { generatePropertyUrl } from '../utils/slug';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -93,14 +94,8 @@ export default function AdminDashboard() {
       
       {/* Sidebar */}
       <aside className="w-[280px] bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0">
-        <div className="p-6 border-b border-gray-100 flex items-center gap-3">
-          <div className="bg-purple-600 text-white p-2 rounded-xl">
-            <Shield size={24} />
-          </div>
-          <div>
-            <h1 className="font-bold text-gray-900 leading-tight text-[15px]">Teralease Admin</h1>
-            <p className="text-[10px] font-bold text-purple-600 tracking-wider uppercase">Workspace</p>
-          </div>
+        <div className="p-6 border-b border-gray-100 flex items-center justify-center">
+          <img src="/logo.webp" alt="Teralease Logo" className="h-[45px] object-contain" />
         </div>
 
         <div className="flex-1 py-6 px-4 flex flex-col gap-8 overflow-y-auto">
@@ -225,7 +220,7 @@ export default function AdminDashboard() {
             </div>
 
             <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-gray-100 text-blue-500 flex items-center justify-center shrink-0">
                 <MessageSquare size={24} />
               </div>
               <div>
@@ -340,7 +335,7 @@ export default function AdminDashboard() {
                             </span>
                           ) : (
                             <div className="flex items-center justify-center gap-2">
-                              <button onClick={() => navigate(`/property/${prop._id}`)} className="p-2 text-gray-400 hover:text-purple-600 transition-colors" title="View Property">
+                              <button onClick={() => navigate(generatePropertyUrl(prop._id, prop.title))} className="p-2 text-gray-400 hover:text-purple-600 transition-colors" title="View Property">
                                 <Eye size={18} />
                               </button>
                               <button onClick={() => handleApprove(prop._id)} className="bg-green-50 text-green-600 hover:bg-green-500 hover:text-white border border-green-200 px-4 py-1.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider">
@@ -357,10 +352,10 @@ export default function AdminDashboard() {
                         {activeTab === 'inventory' && (
                           <td className="px-6 py-4 text-right">
                             <div className="flex items-center justify-end gap-3">
-                              <button onClick={() => navigate(`/property/${prop._id}`)} className="text-gray-400 hover:text-purple-600" title="View">
+                              <button onClick={() => navigate(generatePropertyUrl(prop._id, prop.title))} className="text-gray-400 hover:text-purple-600" title="View">
                                 <Eye size={16} />
                               </button>
-                              <button onClick={() => navigate(`/admin/edit/${prop._id}`)} className="text-gray-400 hover:text-blue-600" title="Edit">
+                              <button onClick={() => navigate(`/admin/edit/${prop._id}`)} className="text-gray-400 hover:text-black" title="Edit">
                                 <Edit size={16} />
                               </button>
                               <button onClick={() => handleDelete(prop._id)} className="text-gray-400 hover:text-red-600" title="Delete">

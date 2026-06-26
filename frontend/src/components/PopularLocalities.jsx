@@ -102,7 +102,7 @@ export default function PopularLocalities() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Explore Popular Localities</span>{' '}
+          <span className="text-[#707B87] font-normal">Explore Popular Localities</span>{' '}
           <span className="text-[#333] font-medium">in Delhi NCR</span>
         </h2>
 
@@ -131,7 +131,7 @@ export default function PopularLocalities() {
                 {/* Top Half */}
                 <div className="p-5 flex justify-between items-start border-b border-gray-100">
                   <div>
-                    <h3 className="text-[#333] font-medium text-[16px] flex items-center gap-1.5 mb-1 cursor-pointer hover:text-blue-600">
+                    <h3 className="text-[#333] font-medium text-[16px] flex items-center gap-1.5 mb-1 cursor-pointer hover:text-black">
                       {loc.name} <ExternalLink size={14} className="text-gray-400" />
                     </h3>
                     <span className="text-blue-500 text-[13px] hover:underline cursor-pointer">
@@ -192,7 +192,7 @@ export default function PopularLocalities() {
 
         {/* Bottom Link */}
         <div className="text-center mt-10">
-          <a href="#" className="text-blue-600 font-medium text-[15px] hover:underline inline-flex items-center">
+          <a href="#" className="text-black font-medium text-[15px] hover:underline inline-flex items-center">
             More Localities <ArrowRight size={16} className="ml-1" />
           </a>
         </div>

@@ -1,11 +1,16 @@
 # Changelog
 
-### 2026-06-26 — Premium UI Upgrade for Property Details
-**What**: Completely redesigned the `PropertyDetails.jsx` page with a premium, modern aesthetic using advanced Tailwind CSS techniques.
-**Why**: User requested a "premium looking" property details page to match the high-quality industrial real estate brand.
+## 2026-06-26 — Premium Black & Silver Theme Upgrade
+**What**: Completely revamped the platform's color palette, typography, and landing page aesthetics to match a premium "Black and Silver" brand identity.
+**Why**: The user wanted to elevate the platform to feel highly premium for agents and property owners, inspired by a new black monochrome logo.
 **Files Changed**:
-- `frontend/src/pages/PropertyDetails.jsx`: Implemented soft shadows, custom gradients, glassmorphism elements, dynamic hover animations, larger modern typography, and a polished sticky contact sidebar.
-
+- `frontend/src/index.css`: Updated global variables to black/silver palette and set "Inter" as the primary font.
+- `frontend/index.html`: Imported the Inter font from Google Fonts.
+- `frontend/src/**/*.jsx`: Globally replaced old primary colors (reds and blues) with sleek black and metallic silver gradients.
+- `frontend/src/components/Hero.jsx`: Upgraded with a premium dark architectural background, dark gradient overlay, and upscale messaging.
+- `frontend/src/components/InfoCards.jsx`: Replaced varied colored cards with polished, metallic-themed gradients.
+- `frontend/src/components/Header.jsx`: Implemented the new `logo.webp` and removed placeholder text.
+- `frontend/src/pages/AdminDashboard.jsx`: Updated sidebar to use the new logo.
 ### 2026-06-26 — Fixed Property Details Page & Seeder
 **What**: Enriched the database seeder to include detailed property specifications, and fixed the broken Google Maps iframe on the property details page.
 **Why**: The property details page had blank sections for "Detailed Specifications" and "Facilities & Specs" because the dummy data lacked these fields. The Google Map was failing with an "Invalid pb parameter" error because it used a broken, hard-coded static embed URL.

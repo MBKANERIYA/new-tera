@@ -63,32 +63,32 @@ export default function UserDashboard() {
       <div className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-[1300px] mx-auto flex items-center justify-between">
           <div className="flex items-center">
-            <button className="px-6 py-3.5 bg-[#2a5b9e] text-white font-medium text-sm flex items-center gap-2 transition-colors">
+            <button className="px-6 py-3.5 bg-[#000000] text-white font-medium text-sm flex items-center gap-2 transition-colors">
               <LayoutGrid size={16} /> Dashboard
             </button>
             <div className="relative group">
-              <button className="px-6 py-3.5 text-gray-600 hover:text-[#2a5b9e] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
+              <button className="px-6 py-3.5 text-gray-600 hover:text-[#000000] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
                 <Building size={16} /> Properties <ChevronDown size={14} className="ml-1" />
               </button>
               <div className="absolute left-0 top-full w-48 bg-white border border-gray-200 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 rounded-b-md flex flex-col">
-                <button onClick={() => navigate('/user/manage-properties')} className="px-4 py-3 text-sm text-left text-gray-700 hover:bg-gray-50 hover:text-[#2a5b9e] border-b border-gray-100 transition-colors">Manage Properties</button>
-                <button onClick={() => navigate('/user/post-property')} className="px-4 py-3 text-sm text-left text-gray-700 hover:bg-gray-50 hover:text-[#2a5b9e] transition-colors">Post Property</button>
+                <button onClick={() => navigate('/user/manage-properties')} className="px-4 py-3 text-sm text-left text-gray-700 hover:bg-gray-50 hover:text-[#000000] border-b border-gray-100 transition-colors">Manage Properties</button>
+                <button onClick={() => navigate('/user/post-property')} className="px-4 py-3 text-sm text-left text-gray-700 hover:bg-gray-50 hover:text-[#000000] transition-colors">Post Property</button>
               </div>
             </div>
-            <button onClick={() => navigate('/user/enquiries')} className="px-6 py-3.5 text-gray-600 hover:text-[#2a5b9e] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
+            <button onClick={() => navigate('/user/enquiries')} className="px-6 py-3.5 text-gray-600 hover:text-[#000000] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
               <Mail size={16} /> Enquiries
             </button>
-            <button className="px-6 py-3.5 text-gray-600 hover:text-[#2a5b9e] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
+            <button className="px-6 py-3.5 text-gray-600 hover:text-[#000000] hover:bg-gray-50 border-r border-gray-100 font-medium text-sm flex items-center gap-2 transition-colors">
               <Users size={16} /> Property Leads
             </button>
-            <button className="px-6 py-3.5 text-gray-600 hover:text-[#2a5b9e] hover:bg-gray-50 font-medium text-sm flex items-center gap-2 transition-colors">
+            <button className="px-6 py-3.5 text-gray-600 hover:text-[#000000] hover:bg-gray-50 font-medium text-sm flex items-center gap-2 transition-colors">
               <FileText size={16} /> More
             </button>
           </div>
           <div className="pr-4 py-2 flex items-center gap-3">
             <button 
               onClick={() => navigate('/user/post-property')}
-              className="bg-[#2a5b9e] hover:bg-[#1d4275] text-white px-5 py-2 rounded text-sm font-medium flex items-center gap-2 shadow-sm transition-all"
+              className="bg-[#000000] hover:bg-[#515A63] text-white px-5 py-2 rounded text-sm font-medium flex items-center gap-2 shadow-sm transition-all"
             >
               <PlusCircle size={16} /> Post Property
             </button>
@@ -111,13 +111,13 @@ export default function UserDashboard() {
       <main className="flex-1 py-8 px-4">
         <div className="max-w-[1300px] mx-auto">
           
-          <h2 className="text-xl font-normal text-[#2a5b9e] mb-4">Your Business Insights</h2>
+          <h2 className="text-xl font-normal text-[#000000] mb-4">Your Business Insights</h2>
           
           {/* 4 Colored Metric Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             
             {/* Red Card */}
-            <div className="bg-[#da251d] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            <div className="bg-[#707B87] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Enquiries Received</span>
                 <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
@@ -141,7 +141,7 @@ export default function UserDashboard() {
             </div>
 
             {/* Blue Card */}
-            <div className="bg-[#2a5b9e] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+            <div className="bg-[#000000] text-white rounded shadow-sm relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
               <div className="p-4 flex justify-between items-start mb-4 relative z-10">
                 <span className="text-sm font-medium">Property for Sale</span>
                 <span className="text-[11px] opacity-90 cursor-pointer hover:underline">More Info</span>
@@ -168,16 +168,16 @@ export default function UserDashboard() {
 
           {/* Quick Links */}
           <div className="flex flex-wrap gap-3 mb-8">
-            <button onClick={() => navigate('/user/post-property')} className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#2a5b9e] hover:text-[#2a5b9e] shadow-sm transition-colors">
+            <button onClick={() => navigate('/user/post-property')} className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               Post Property <ChevronRight size={14} className="ml-1" />
             </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#2a5b9e] hover:text-[#2a5b9e] shadow-sm transition-colors">
+            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               My Profile <ChevronRight size={14} className="ml-1" />
             </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#2a5b9e] hover:text-[#2a5b9e] shadow-sm transition-colors">
+            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               My Advertisements <ChevronRight size={14} className="ml-1" />
             </button>
-            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#2a5b9e] hover:text-[#2a5b9e] shadow-sm transition-colors">
+            <button className="border border-gray-300 bg-white px-4 py-2 rounded text-sm font-medium text-gray-700 flex items-center gap-1 hover:border-[#000000] hover:text-[#000000] shadow-sm transition-colors">
               Change Password <ChevronRight size={14} className="ml-1" />
             </button>
           </div>
@@ -204,10 +204,10 @@ export default function UserDashboard() {
                           <p className="text-sm font-bold text-gray-800">{inq.name}</p>
                           <p className="text-xs text-gray-500 truncate w-[150px]">{inq.propertyId?.title || "Property"}</p>
                         </div>
-                        <a href={`tel:${inq.number}`} className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded font-medium hover:bg-blue-100 transition-colors">Contact</a>
+                        <a href={`tel:${inq.number}`} className="text-xs bg-gray-100 text-black px-2 py-1 rounded font-medium hover:bg-blue-100 transition-colors">Contact</a>
                       </div>
                     ))}
-                    <button onClick={() => navigate('/user/enquiries')} className="text-xs text-[#2a5b9e] font-bold mt-2 hover:underline self-start">View All Enquiries</button>
+                    <button onClick={() => navigate('/user/enquiries')} className="text-xs text-[#000000] font-bold mt-2 hover:underline self-start">View All Enquiries</button>
                   </div>
                 )}
               </div>
@@ -250,7 +250,7 @@ export default function UserDashboard() {
                 
                 <div className="px-4 py-3 flex justify-between items-center hover:bg-gray-50 transition-colors">
                   <span className="text-sm text-gray-600">Waiting for Approval Property</span>
-                  <span className="bg-[#da251d] text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">{pendingProps.toString().padStart(2, '0')}</span>
+                  <span className="bg-[#707B87] text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">{pendingProps.toString().padStart(2, '0')}</span>
                 </div>
                 
                 <div className="px-4 py-3 flex justify-between items-center hover:bg-gray-50 transition-colors">
@@ -260,7 +260,7 @@ export default function UserDashboard() {
                 
                 <div className="px-4 py-3 flex justify-between items-center hover:bg-gray-50 transition-colors">
                   <span className="text-sm text-gray-600">Incomplete Property</span>
-                  <span className="bg-[#2a5b9e] text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">00</span>
+                  <span className="bg-[#000000] text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">00</span>
                 </div>
 
               </div>

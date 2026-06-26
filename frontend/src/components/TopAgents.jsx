@@ -125,7 +125,7 @@ export default function TopAgents() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Top Real Estate Agents</span>{' '}
+          <span className="text-[#707B87] font-normal">Top Real Estate Agents</span>{' '}
           <span className="text-[#333] font-medium">in Delhi NCR</span>
         </h2>
 
@@ -158,7 +158,7 @@ export default function TopAgents() {
                     <img src={agent.logo} alt={agent.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h3 className="text-[#333] font-medium text-[15px] leading-tight mb-1 cursor-pointer hover:text-blue-600">
+                    <h3 className="text-[#333] font-medium text-[15px] leading-tight mb-1 cursor-pointer hover:text-black">
                       {agent.name}
                     </h3>
                     <p className="text-gray-500 text-[12px]">
@@ -192,7 +192,7 @@ export default function TopAgents() {
                     </span>
                   ))}
                   {agent.moreTags > 0 && (
-                    <span className="px-3 py-1 bg-blue-50 text-blue-600 font-medium rounded-full text-[11px] cursor-pointer hover:bg-blue-100">
+                    <span className="px-3 py-1 bg-gray-100 text-black font-medium rounded-full text-[11px] cursor-pointer hover:bg-blue-100">
                       +{agent.moreTags}
                     </span>
                   )}
@@ -214,7 +214,7 @@ export default function TopAgents() {
 
         {/* Bottom Link */}
         <div className="text-center mt-8">
-          <a href="#" className="text-blue-600 font-medium text-[15px] hover:underline inline-flex items-center">
+          <a href="#" className="text-black font-medium text-[15px] hover:underline inline-flex items-center">
             See all Agents <ArrowRight size={16} className="ml-1" />
           </a>
         </div>

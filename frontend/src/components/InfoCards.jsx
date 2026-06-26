@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ArrowRight, Timer, Building2, ShieldCheck, Warehouse } from 'lucide-react';
 
 export default function InfoCards() {
@@ -8,9 +8,9 @@ export default function InfoCards() {
       title: "List Your Property",
       description: "Lease or sell your commercial space with our premium broker network.",
       buttonText: "Start Listing",
-      // Dark sleek gradient
-      bgClass: "bg-gradient-to-br from-[#1a1c29] to-[#2d3748]", 
-      shadowClass: "hover:shadow-[0_15px_35px_rgba(26,28,41,0.4)]",
+      // Deep Black gradient
+      bgClass: "bg-gradient-to-br from-[#111111] to-[#222222]", 
+      shadowClass: "hover:shadow-[0_15px_35px_rgba(17,17,17,0.4)]",
       textColor: "text-white",
       icon: Timer
     },
@@ -19,9 +19,9 @@ export default function InfoCards() {
       title: "Top Industrial Brokers",
       description: "Connect with elite, verified agents specializing in large-scale properties.",
       buttonText: "Find Agents",
-      // Premium Gold gradient
-      bgClass: "bg-gradient-to-br from-[#c49a2b] to-[#8f6d19]",
-      shadowClass: "hover:shadow-[0_15px_35px_rgba(196,154,43,0.4)]",
+      // Metallic Silver gradient
+      bgClass: "bg-gradient-to-br from-[#8391A1] to-[#5A6570]",
+      shadowClass: "hover:shadow-[0_15px_35px_rgba(131,145,161,0.4)]",
       textColor: "text-white",
       icon: Building2
     },
@@ -30,9 +30,9 @@ export default function InfoCards() {
       title: "Verified Commercial Sales",
       description: "Discover high-yield investment opportunities with RERA-certified trust.",
       buttonText: "Explore Sales",
-      // Deep teal/emerald gradient
-      bgClass: "bg-gradient-to-br from-[#0f4c5c] to-[#062c36]",
-      shadowClass: "hover:shadow-[0_15px_35px_rgba(15,76,92,0.4)]",
+      // Premium Charcoal gradient
+      bgClass: "bg-gradient-to-br from-[#2D3748] to-[#1A202C]",
+      shadowClass: "hover:shadow-[0_15px_35px_rgba(45,55,72,0.4)]",
       textColor: "text-white",
       icon: ShieldCheck
     },
@@ -41,9 +41,9 @@ export default function InfoCards() {
       title: "Premium Warehouse Leases",
       description: "Browse state-of-the-art logistics hubs across prime Delhi NCR corridors.",
       buttonText: "View Leases",
-      // Rich Burgundy gradient
-      bgClass: "bg-gradient-to-br from-[#780000] to-[#400000]",
-      shadowClass: "hover:shadow-[0_15px_35px_rgba(120,0,0,0.4)]",
+      // Dark Silver gradient
+      bgClass: "bg-gradient-to-br from-[#4A5568] to-[#2D3748]",
+      shadowClass: "hover:shadow-[0_15px_35px_rgba(74,85,104,0.4)]",
       textColor: "text-white",
       icon: Warehouse
     }

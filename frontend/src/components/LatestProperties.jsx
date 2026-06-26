@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generatePropertyUrl } from '../utils/slug';
 
 export default function LatestProperties() {
   const saleScrollRef = useRef(null);
@@ -76,8 +77,8 @@ const renderSlider = (title, data, ref) => (
                 <p className="text-gray-500 text-[12px] mb-4 truncate">{item.address}</p>
                 
                 <Link 
-                  to={`/property/${item._id}`} 
-                  className="text-[#3182ce] border border-[#bee3f8] rounded-[3px] px-4 py-1.5 text-[12px] font-medium hover:bg-[#ebf8ff] transition-colors w-max block"
+                  to={generatePropertyUrl(item._id, item.title)} 
+                  className="text-[#000000] border border-[#e5e5e5] rounded-[3px] px-4 py-1.5 text-[12px] font-medium hover:bg-[#f5f5f5] transition-colors w-max block"
                 >
                   View Details
                 </Link>
@@ -105,7 +106,7 @@ const renderSlider = (title, data, ref) => (
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Latest Properties for Sale / Lease</span>{' '}
+          <span className="text-[#707B87] font-normal">Latest Properties for Sale / Lease</span>{' '}
           <span className="text-[#333] font-medium">in Delhi NCR</span>
         </h2>
 

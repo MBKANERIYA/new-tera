@@ -9,7 +9,7 @@ export default function InsightsTools() {
       description: 'Planning to buy property in a prime locality in Delhi NCR? Here are some of the top locations with verified commercial and industrial properties.',
       icon: MapPin,
       gradient: 'from-blue-100 to-blue-50',
-      iconColor: 'text-blue-600'
+      iconColor: 'text-black'
     },
     {
       id: 2,
@@ -43,7 +43,7 @@ export default function InsightsTools() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Insights &</span>{' '}
+          <span className="text-[#707B87] font-normal">Insights &</span>{' '}
           <span className="text-[#333] font-medium">Tools</span>
         </h2>
 

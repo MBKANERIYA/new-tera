@@ -22,6 +22,7 @@ export default function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/property/:id" element={<PropertyDetails />} />
+        <Route path="/property/:slug/:id" element={<PropertyDetails />} />
         <Route path="/properties" element={<PropertyCollection />} />
         <Route path="/post-property" element={<PostPropertyAuth />} />
         <Route path="/user/dashboard" element={<UserDashboard />} />

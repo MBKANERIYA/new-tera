@@ -35,7 +35,7 @@ export default function RealEstateBlogs() {
         
         {/* Header */}
         <h2 className="text-center text-[28px] md:text-[32px] mb-12">
-          <span className="text-[#c82021] font-normal">Explore Delhi NCR Real Estate</span>{' '}
+          <span className="text-[#707B87] font-normal">Explore Delhi NCR Real Estate</span>{' '}
           <span className="text-[#333] font-medium">Blogs</span>
         </h2>
 
@@ -58,7 +58,7 @@ export default function RealEstateBlogs() {
 
               {/* Content */}
               <div className="p-5 flex-1 flex flex-col border-t border-gray-100">
-                <h3 className="text-[#333] font-semibold text-[15px] leading-snug mb-3 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-[#333] font-semibold text-[15px] leading-snug mb-3 group-hover:text-black transition-colors">
                   {blog.title}
                 </h3>
                 <p className="text-gray-500 text-[13px] leading-relaxed">
@@ -72,7 +72,7 @@ export default function RealEstateBlogs() {
 
         {/* Action Link */}
         <div className="text-center mt-10">
-          <a href="#" className="text-blue-600 font-medium text-[15px] hover:underline inline-flex items-center">
+          <a href="#" className="text-black font-medium text-[15px] hover:underline inline-flex items-center">
             See all Blog <ArrowRight size={16} className="ml-1" />
           </a>
         </div>

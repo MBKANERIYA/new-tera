@@ -84,7 +84,7 @@ export default function PostPropertyAuth() {
           <div className="flex-1 w-full md:max-w-[400px]">
             <h1 className="text-[32px] md:text-[38px] text-[#424242] leading-[1.2] mb-8 font-light">
               Sell or Rent Your Property <br/>
-              Online for <span className="text-[#2a5b9e] font-medium">FREE!</span>
+              Online for <span className="text-[#000000] font-medium">FREE!</span>
             </h1>
 
             <div className="space-y-4">
@@ -95,7 +95,7 @@ export default function PostPropertyAuth() {
                 'Get shortlisted Buyers & Tenants'
               ].map((text, idx) => (
                 <div key={idx} className="flex items-center gap-3 bg-white/60 backdrop-blur-sm border border-gray-200 rounded-full px-5 py-3 shadow-sm w-max pr-10">
-                  <div className="bg-[#2a5b9e] rounded-full w-5 h-5 flex items-center justify-center text-white shrink-0">
+                  <div className="bg-[#000000] rounded-full w-5 h-5 flex items-center justify-center text-white shrink-0">
                     <ArrowRight size={12} strokeWidth={3} />
                   </div>
                   <span className="text-[15px] text-[#424242] font-medium">{text}</span>
@@ -109,7 +109,7 @@ export default function PostPropertyAuth() {
             <div className="mb-8">
               <h2 className="text-[22px] font-normal text-[#333] mb-2 relative inline-block">
                 {isLogin ? 'Welcome Back' : "Let's get you started"}
-                <div className="absolute -bottom-2 left-0 w-12 h-[3px] bg-[#da251d]"></div>
+                <div className="absolute -bottom-2 left-0 w-12 h-[3px] bg-[#707B87]"></div>
               </h2>
             </div>
 
@@ -128,7 +128,7 @@ export default function PostPropertyAuth() {
                     <input 
                       type="text" 
                       placeholder="Your Name" 
-                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                       required={!isLogin}
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -143,7 +143,7 @@ export default function PostPropertyAuth() {
                     <input 
                       type="tel" 
                       placeholder="Mobile Number" 
-                      className="w-full border border-gray-300 rounded-r p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                      className="w-full border border-gray-300 rounded-r p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                       required={!isLogin}
                       value={formData.mobile}
                       onChange={(e) => setFormData({...formData, mobile: e.target.value})}
@@ -158,7 +158,7 @@ export default function PostPropertyAuth() {
                   <input 
                     type={isLogin ? "text" : "email"} 
                     placeholder={isLogin ? "Email or Mobile Number" : "Email ID"} 
-                    className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                    className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                     required
                     value={isLogin ? formData.mobile : formData.email} // In login mode, we map the input to formData.mobile conceptually, but we can just use formData.mobile directly for logic
                     onChange={(e) => {
@@ -177,7 +177,7 @@ export default function PostPropertyAuth() {
                     <input 
                       type="text" 
                       placeholder="Choose your location" 
-                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                       required={!isLogin}
                       value={formData.location}
                       onChange={(e) => setFormData({...formData, location: e.target.value})}
@@ -192,7 +192,7 @@ export default function PostPropertyAuth() {
                   <input 
                     type="password" 
                     placeholder="Password" 
-                    className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                    className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                     required
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
@@ -203,7 +203,7 @@ export default function PostPropertyAuth() {
                     <input 
                       type="password" 
                       placeholder="Confirm Password" 
-                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#2a5b9e] focus:ring-1 focus:ring-[#2a5b9e] transition-all"
+                      className="w-full border border-gray-300 rounded p-3 text-[14px] text-gray-700 focus:outline-none focus:border-[#000000] focus:ring-1 focus:ring-[#000000] transition-all"
                       required={!isLogin}
                       value={formData.confirmPassword}
                       onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
@@ -226,7 +226,7 @@ export default function PostPropertyAuth() {
                           onClick={() => setFormData({...formData, userType: type})}
                           className={`px-4 py-1.5 rounded-full text-[13px] border transition-all ${
                             formData.userType === type 
-                              ? 'border-[#2a5b9e] bg-[#f0f4f8] text-[#2a5b9e] font-medium shadow-sm' 
+                              ? 'border-[#000000] bg-[#f0f4f8] text-[#000000] font-medium shadow-sm' 
                               : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50'
                           }`}
                         >
@@ -247,7 +247,7 @@ export default function PostPropertyAuth() {
                           onClick={() => setFormData({...formData, purpose: purpose})}
                           className={`px-4 py-1.5 rounded-full text-[13px] border transition-all ${
                             formData.purpose === purpose 
-                              ? 'border-[#2a5b9e] bg-[#f0f4f8] text-[#2a5b9e] font-medium shadow-sm' 
+                              ? 'border-[#000000] bg-[#f0f4f8] text-[#000000] font-medium shadow-sm' 
                               : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50'
                           }`}
                         >
@@ -264,7 +264,7 @@ export default function PostPropertyAuth() {
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="bg-gradient-to-r from-[#2a5b9e] to-[#3876c4] hover:from-[#1d4275] hover:to-[#2a5b9e] text-white font-medium px-12 py-3 rounded-full transition-all shadow-md hover:shadow-lg text-[15px] min-w-[200px] flex justify-center items-center"
+                  className="bg-gradient-to-r from-[#000000] to-[#3876c4] hover:from-[#515A63] hover:to-[#000000] text-white font-medium px-12 py-3 rounded-full transition-all shadow-md hover:shadow-lg text-[15px] min-w-[200px] flex justify-center items-center"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -280,7 +280,7 @@ export default function PostPropertyAuth() {
                     setIsLogin(!isLogin);
                     setError('');
                   }}
-                  className="text-[14px] text-gray-600 hover:text-[#da251d] transition-colors font-medium"
+                  className="text-[14px] text-gray-600 hover:text-[#707B87] transition-colors font-medium"
                 >
                   {isLogin 
                     ? "New here? Register to post property" 

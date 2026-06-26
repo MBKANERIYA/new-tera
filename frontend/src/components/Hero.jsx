@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, LocateFixed, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { generatePropertyUrl } from '../utils/slug';
 
 export default function Hero() {
   const [activeTab, setActiveTab] = useState('Sell');
@@ -98,18 +99,21 @@ export default function Hero() {
 
   return (
     <section
-      className="relative z-20 w-full h-[450px] md:h-[500px] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcNsOdem3LsbDQSGtkp0UinSY4JDXkz0nw3fAsLvuu8BXO4HBo16jr2KY&s=10")' }}
+      className="relative z-20 w-full h-[450px] md:h-[520px] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop")' }}
     >
-      {/* Light overlay to ensure the text remains legible over the background image */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent"></div>
+      {/* Dark premium overlay to match black/silver theme */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90"></div>
 
-      <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center mt-[-40px]">
+      <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center mt-[-20px]">
 
-        {/* Heading */}
-        <h1 className="text-[26px] md:text-[34px] text-[#333] mb-8 font-normal text-center">
-          Properties, Agents & Real Estate Services in <span className="text-[#2a5b9e]">Delhi NCR</span>
+        {/* Premium Heading */}
+        <h1 className="text-[32px] md:text-[46px] text-white mb-3 font-bold text-center tracking-tight">
+          The Premier Real Estate Network in <span className="text-[#B3BCC5]">Delhi NCR</span>
         </h1>
+        <p className="text-gray-300 text-center mb-10 text-[15px] md:text-[17px] font-medium max-w-2xl">
+          Connect with elite agents, list premium properties, and discover exclusive spaces tailored for your business.
+        </p>
 
         {/* Premium Search Box Container */}
         <div className="w-full bg-white/10 backdrop-blur-md p-4 md:p-5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-white/20">
@@ -156,7 +160,7 @@ export default function Hero() {
                     {propertyTypesList.map((type, index) => (
                       <div
                         key={index}
-                        className="px-4 py-3 hover:bg-blue-50/80 hover:text-blue-700 cursor-pointer text-[14px] font-medium text-gray-600 rounded-lg transition-colors mb-1 last:mb-0"
+                        className="px-4 py-3 hover:bg-gray-100/80 hover:text-blue-700 cursor-pointer text-[14px] font-medium text-gray-600 rounded-lg transition-colors mb-1 last:mb-0"
                         onClick={() => {
                           setSelectedPropertyType(type === 'All Types' ? 'Property Types' : type);
                           setIsPropertyTypeOpen(false);
@@ -188,7 +192,7 @@ export default function Hero() {
                 }}
                 className="w-full h-full py-4 pl-14 pr-14 focus:outline-none text-[16px] placeholder-gray-400 font-medium text-gray-800 bg-transparent"
               />
-              <button className="absolute right-3 text-gray-400 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-all">
+              <button className="absolute right-3 text-gray-400 hover:text-black p-2 rounded-full hover:bg-gray-100 transition-all">
                 <LocateFixed size={20} strokeWidth={2.5} />
               </button>
 
@@ -203,12 +207,12 @@ export default function Hero() {
                         setSearchQuery(suggestion.text);
                         setShowSuggestions(false);
                         if (suggestion.type === 'property') {
-                          navigate(`/property/${suggestion.id}`);
+                          navigate(generatePropertyUrl(suggestion.id, suggestion.text));
                         } else {
                           handleSearch(suggestion.text);
                         }
                       }}
-                      className="px-5 py-3 hover:bg-blue-50 hover:text-blue-700 cursor-pointer text-[15px] text-gray-600 flex items-center gap-3 transition-colors"
+                      className="px-5 py-3 hover:bg-gray-100 hover:text-blue-700 cursor-pointer text-[15px] text-gray-600 flex items-center gap-3 transition-colors"
                     >
                       <Search size={16} className="text-gray-400" />
                       {suggestion.text}
