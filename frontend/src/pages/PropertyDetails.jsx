@@ -19,7 +19,7 @@ export default function PropertyDetails() {
     e.preventDefault();
     setInquiryStatus('submitting');
     try {
-      const res = await fetch('/_/backend/api/inquiries', {
+      const res = await fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -46,7 +46,7 @@ export default function PropertyDetails() {
   };
 
   React.useEffect(() => {
-    fetch(`/_/backend/api/properties/${id}`)
+    fetch(`/api/properties/${id}`)
       .then(res => res.json())
       .then(data => {
         setProperty(data);

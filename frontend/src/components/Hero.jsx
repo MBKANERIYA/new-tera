@@ -12,7 +12,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    fetch('/_/backend/api/properties')
+    fetch('/api/properties')
       .then(res => res.json())
       .then(data => setPropertiesData(data.filter(p => p.status === 'approved')))
       .catch(err => console.error(err));

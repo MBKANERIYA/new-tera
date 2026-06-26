@@ -17,7 +17,7 @@ export default function LatestProperties() {
   const [leaseProperties, setLeaseProperties] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('/_/backend/api/properties')
+    fetch('/api/properties')
       .then(res => res.json())
       .then(data => {
         const approvedData = data.filter(p => p.status === 'approved');

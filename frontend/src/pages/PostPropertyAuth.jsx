@@ -41,7 +41,7 @@ export default function PostPropertyAuth() {
     }
 
     try {
-      const endpoint = isLogin ? '/_/backend/api/auth/login' : '/_/backend/api/auth/register';
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
       
       const payload = isLogin ? {
         loginId: formData.mobile || formData.email, // Use whichever is filled or handle better later

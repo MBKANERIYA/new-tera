@@ -1,5 +1,13 @@
 # Changelog
 
+### 2026-06-26 — Fixed Vercel API Routing
+**What**: Reverted frontend API fetch calls to `/api/...` and updated `vercel.json` backend `routePrefix` to `/api`.
+**Why**: Using the arbitrary `/_/backend` route prefix resulted in Express receiving mismatched URL routes, causing it to return 404s (which manifested as HTML `<` syntax errors in the frontend). Changing the prefix directly to `/api` ensures frontend requests seamlessly match the backend Express routing logic.
+**Files Changed**:
+- `vercel.json`: Changed backend `routePrefix` from `/_/backend` to `/api`.
+- `frontend/src/**/*.jsx`: Reverted all `fetch` paths back to `/api/...`.
+- `frontend/vite.config.js`: Reverted the local development proxy back to `/api`.
+
 ### 2026-06-26 — Resolved Vercel NPM Build Conflict
 **What**: Added an `overrides` field in `backend/package.json` to resolve a peer dependency conflict between `cloudinary` and `multer-storage-cloudinary`.
 **Why**: Vercel's build process failed with an `ERESOLVE` error because `multer-storage-cloudinary@4.0.0` expects `cloudinary@^1.21.0` (v1), but the project uses `cloudinary@2.10.0` (v2). Adding the override forces npm to accept the newer v2 version without breaking the build.
