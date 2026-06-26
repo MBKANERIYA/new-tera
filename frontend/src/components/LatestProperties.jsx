@@ -1,4 +1,4 @@
-﻿import React, { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export default function LatestProperties() {
   const [leaseProperties, setLeaseProperties] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:5001/api/properties')
+    fetch('/api/properties')
       .then(res => res.json())
       .then(data => {
         const approvedData = data.filter(p => p.status === 'approved');

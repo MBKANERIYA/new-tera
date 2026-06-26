@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
@@ -48,7 +48,7 @@ export default function PostPropertyAuth() {
         password: formData.password
       } : formData;
 
-      const response = await fetch(`http://localhost:5001${endpoint}`, {
+      const response = await fetch(`${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

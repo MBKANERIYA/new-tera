@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { 
   Building, LayoutGrid, Clock, MessageSquare, Plus, ExternalLink, 
@@ -23,7 +23,7 @@ export default function AdminDashboard() {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/properties');
+      const response = await fetch('/api/properties');
       if (response.ok) {
         const data = await response.json();
         setProperties(data);
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
 
   const handleApprove = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5001/api/properties/${id}`, {
+      const res = await fetch(`/api/properties/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'approved' })
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
 
   const handleReject = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5001/api/properties/${id}`, {
+      const res = await fetch(`/api/properties/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'rejected' })
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this property?')) return;
     try {
-      const res = await fetch(`http://localhost:5001/api/properties/${id}`, {
+      const res = await fetch(`/api/properties/${id}`, {
         method: 'DELETE'
       });
       if (res.ok) fetchProperties();
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
         <header className="bg-white h-[80px] border-b border-gray-200 px-8 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span>Dashboard</span>
-            <span>â€º</span>
+            <span>›</span>
             <span className="font-bold text-gray-900">{activeTab === 'inventory' ? 'Inventory Overview' : 'Pending Submissions'}</span>
           </div>
           <button onClick={() => navigate('/admin/create')} className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-md shadow-purple-500/20 flex items-center gap-2 transition-all">

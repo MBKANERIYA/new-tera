@@ -66,7 +66,7 @@ export default function AdminPostProperty() {
     if (id) {
       const fetchProperty = async () => {
         try {
-          const res = await fetch(`http://localhost:5001/api/properties/${id}`);
+          const res = await fetch(`/api/properties/${id}`);
           if (res.ok) {
             const data = await res.json();
             
@@ -257,7 +257,7 @@ export default function AdminPostProperty() {
     if (mediaFiles.removeVideo) data.append('removeVideo', 'true');
 
     try {
-      const url = id ? `http://localhost:5001/api/properties/${id}` : 'http://localhost:5001/api/properties';
+      const url = id ? `/api/properties/${id}` : '/api/properties';
       const method = id ? 'PUT' : 'POST';
 
       const response = await fetch(url, {

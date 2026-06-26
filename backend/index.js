@@ -23,6 +23,11 @@ app.use('/api/inquiries', inquiryRoutes);
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    // Only start the server locally. Vercel will export the app for serverless functions.
+    if (!process.env.VERCEL) {
+      app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    }
   })
   .catch((error) => console.log('MongoDB connection error:', error.message));
+
+export default app;

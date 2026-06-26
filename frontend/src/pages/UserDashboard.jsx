@@ -19,7 +19,7 @@ export default function UserDashboard() {
         setUser(parsedUser);
         
         // Fetch properties for this user
-        fetch('http://localhost:5001/api/properties')
+        fetch('/api/properties')
           .then(res => res.json())
           .then(data => {
             const userProps = data.filter(p => p.submittedBy === parsedUser.mobile);
@@ -32,7 +32,7 @@ export default function UserDashboard() {
           });
           
         // Fetch enquiries
-        fetch(`http://localhost:5001/api/inquiries/${parsedUser.mobile}`)
+        fetch(`/api/inquiries/${parsedUser.mobile}`)
           .then(res => res.json())
           .then(data => setInquiries(data))
           .catch(err => console.error(err));
