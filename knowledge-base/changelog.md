@@ -1,5 +1,11 @@
 # Changelog
 
+### 2026-06-26 — Fixed Vercel Build Configuration
+**What**: Updated `vercel.json` backend service configuration with required `builder` and `entrypoint`.
+**Why**: Vercel rejected the initial configuration during build because the backend service lacked explicit instructions on how to process the Node.js application.
+**Files Changed**:
+- `vercel.json`: Added `"builder": "@vercel/node"` and `"entrypoint": "index.js"` to the `backend` service definition.
+
 ### 2026-06-26 — Configured Project for Vercel Deployment
 **What**: Prepared the frontend and backend for deployment on Vercel as a single monorepo project.
 **Why**: User requested to deploy the application on Vercel using `experimentalServices`, which required specific configuration for routing and API calls.
