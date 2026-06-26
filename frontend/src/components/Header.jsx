@@ -16,6 +16,42 @@ export default function Header() {
     }
   }, []);
 
+  const [industrialCities, setIndustrialCities] = useState([]);
+  const [warehouseCities, setWarehouseCities] = useState([]);
+  const [commercialCities, setCommercialCities] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/properties')
+      .then(res => res.json())
+      .then(data => {
+        const approved = data.filter(p => p.status === 'approved' && p.city);
+        
+        const getCategory = (p) => {
+          if (p.category) return p.category;
+          if (p.type && p.type.includes('Industrial')) return 'Industrial';
+          if (p.type && (p.type.includes('Warehouse') || p.type.includes('Godown'))) return 'Warehouse';
+          return 'Commercial';
+        };
+        
+        const getUniqueCities = (category) => {
+          return Array.from(new Set(
+            approved
+              .filter(p => getCategory(p) === category)
+              .map(p => p.city.trim())
+          )).sort();
+        };
+
+        setIndustrialCities(getUniqueCities('Industrial'));
+        setWarehouseCities(getUniqueCities('Warehouse'));
+        setCommercialCities(getUniqueCities('Commercial'));
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  const industrialUrl = (city) => `/properties?search=${city}&propertyType=Industrial+Plot&propertyType=Industrial+Workspace`;
+  const warehouseUrl = (city) => `/properties?search=${city}&propertyType=Warehouse+Space&propertyType=Godown`;
+  const commercialUrl = (city) => `/properties?search=${city}&propertyType=Office+Space&propertyType=Retail+Shop&propertyType=Commercial+Land&propertyType=Agriculter+Land`;
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-[1400px] mx-auto px-4 h-16 flex justify-between items-center text-[15px]">
@@ -38,29 +74,74 @@ export default function Header() {
           {/* Industrial Dropdown */}
           <div className="relative group">
             <div className="flex items-center gap-1 cursor-pointer hover:text-[#000000] py-4">Industrial <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" /></div>
-            <div className="absolute top-full left-0 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[200px] py-2 z-50">
-              <Link to="/properties?propertyType=Industrial+Plot" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Industrial Plot</Link>
-              <Link to="/properties?propertyType=Industrial+Workspace" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Industrial Workspace</Link>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[320px] p-4 z-50 flex gap-6">
+              <div className="flex-1 border-r border-gray-100 pr-6">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By City</h4>
+                <div className="space-y-1">
+                  {industrialCities.length > 0 ? industrialCities.map(city => (
+                    <Link key={city} to={industrialUrl(city)} className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">{city}</Link>
+                  )) : (
+                    <div className="text-[12px] text-gray-400 px-2">No cities found</div>
+                  )}
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By Type</h4>
+                <div className="space-y-1">
+                  <Link to="/properties?propertyType=Industrial+Plot" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Industrial Plot</Link>
+                  <Link to="/properties?propertyType=Industrial+Workspace" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Industrial Workspace</Link>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Warehouse Dropdown */}
           <div className="relative group">
             <div className="flex items-center gap-1 cursor-pointer hover:text-[#000000] py-4">Warehouse <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" /></div>
-            <div className="absolute top-full left-0 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[200px] py-2 z-50">
-              <Link to="/properties?propertyType=Warehouse+Space" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Warehouse Space</Link>
-              <Link to="/properties?propertyType=Godown" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Godown</Link>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[320px] p-4 z-50 flex gap-6">
+              <div className="flex-1 border-r border-gray-100 pr-6">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By City</h4>
+                <div className="space-y-1">
+                  {warehouseCities.length > 0 ? warehouseCities.map(city => (
+                    <Link key={city} to={warehouseUrl(city)} className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">{city}</Link>
+                  )) : (
+                    <div className="text-[12px] text-gray-400 px-2">No cities found</div>
+                  )}
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By Type</h4>
+                <div className="space-y-1">
+                  <Link to="/properties?propertyType=Warehouse+Space" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Warehouse Space</Link>
+                  <Link to="/properties?propertyType=Godown" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Godown</Link>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Commercial Dropdown */}
           <div className="relative group">
             <div className="flex items-center gap-1 cursor-pointer hover:text-[#000000] py-4">Commercial <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" /></div>
-            <div className="absolute top-full left-0 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[200px] py-2 z-50">
-              <Link to="/properties?propertyType=Office+Space" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Office Space</Link>
-              <Link to="/properties?propertyType=Retail+Shop" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Retail Shop</Link>
-              <Link to="/properties?propertyType=Commercial+Land" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Commercial Land</Link>
-              <Link to="/properties?propertyType=Agriculter+Land" className="block px-4 py-2.5 text-[14px] text-gray-600 hover:bg-gray-100 hover:text-[#000000] transition-colors">Agriculter Land</Link>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[320px] p-4 z-50 flex gap-6">
+              <div className="flex-1 border-r border-gray-100 pr-6">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By City</h4>
+                <div className="space-y-1">
+                  {commercialCities.length > 0 ? commercialCities.map(city => (
+                    <Link key={city} to={commercialUrl(city)} className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">{city}</Link>
+                  )) : (
+                    <div className="text-[12px] text-gray-400 px-2">No cities found</div>
+                  )}
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">By Type</h4>
+                <div className="space-y-1">
+                  <Link to="/properties?propertyType=Office+Space" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Office Space</Link>
+                  <Link to="/properties?propertyType=Retail+Shop" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Retail Shop</Link>
+                  <Link to="/properties?propertyType=Commercial+Land" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Commercial Land</Link>
+                  <Link to="/properties?propertyType=Agriculter+Land" className="block px-2 py-1.5 text-[14px] text-gray-600 hover:text-black hover:bg-gray-50 rounded">Agriculter Land</Link>
+                </div>
+              </div>
             </div>
           </div>
 

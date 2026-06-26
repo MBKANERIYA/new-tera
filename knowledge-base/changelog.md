@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-06-26 - Added City to Property Schema
+**What**: Explicitly added the city field to the Mongoose Property schema.
+**Why**: To ensure the database properly enforces and recognizes the city attribute for every property listing, enabling accurate city-based filtering and display across the application.
+**Files Changed**:
+- ackend/models/Property.js: Added city: { type: String } to the schema definition.
+
+## 2026-06-26 - Dynamic Mega Menu by City and Type
+**What**: Updated the global Header navigation dropdowns (Industrial, Warehouse, Commercial) to display two columns: "By City" and "By Type". The list of cities is now dynamically generated based on active properties in the database.
+**Why**: The user wanted navigation to reflect real inventory so visitors only see cities that actually have properties for that category, rather than a hardcoded list of cities that might lead to empty search results.
+**Files Changed**:
+- rontend/src/components/Header.jsx: Modified dropdown structures, added API fetch to get properties on mount, and extracted unique cities per category to dynamically render the "By City" column.
+
+## 2026-06-26 - Added Similar Properties Section
+**What**: Created a SimilarProperties component and integrated it at the bottom of the PropertyDetails page.
+**Why**: To improve user engagement and property discovery by showing users alternative properties matching the current property's category or lease type.
+**Files Changed**:
+- rontend/src/components/SimilarProperties.jsx: Created a new horizontally scrolling slider component to display similar properties.
+- rontend/src/pages/PropertyDetails.jsx: Imported and rendered SimilarProperties directly above the footer.
+
 ## 2026-06-26 - Added Image Upload Functionality for Blogs and Testimonials
 **What**: Created a generic /api/upload endpoint in the backend and updated the AdminBlogs and AdminTestimonials UI to include a file input for image uploads instead of a text URL field.
 **Why**: The user wanted native image upload functionality so they can easily attach images directly from their device, rather than having to manually paste external image URLs.

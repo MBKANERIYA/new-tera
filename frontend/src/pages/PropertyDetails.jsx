@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Building2, Expand, Calendar, CheckCircle2, ChevronRight, ChevronLeft, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SimilarProperties from '../components/SimilarProperties';
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -312,6 +313,8 @@ export default function PropertyDetails() {
         </div>
 
       </main>
+
+      {property && <SimilarProperties currentProperty={property} />}
 
       <Footer />
 

@@ -5,6 +5,7 @@ const propertySchema = new mongoose.Schema({
   type: { type: String }, 
   price: { type: String },
   location: { type: String },
+  city: { type: String },
   listingType: { type: String }
 }, { timestamps: true, strict: false });
 
